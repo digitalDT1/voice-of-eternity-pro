@@ -4,6 +4,7 @@ import { Play, Headphones, Heart, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import heroBg from "@/assets/hero-bg.jpg";
+import voeLogo from "@/assets/voe-logo-transparent.png";
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -43,6 +44,13 @@ const Index = () => {
       >
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
+            <div className="mb-8 animate-scale-in">
+              <img 
+                src={voeLogo} 
+                alt="Voice of Eternity Logo" 
+                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto mb-6"
+              />
+            </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 animate-fade-in">
               Voice of <span className="text-gradient bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">Eternity</span>
             </h1>

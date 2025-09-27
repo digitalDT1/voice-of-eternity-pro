@@ -116,33 +116,95 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px; /* Apple HIG minimum readable text */
+    line-height: 1.5;
   }
   
+  /* Apple HIG & Samsung One UI Typography Scale */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', Georgia, serif;
     font-weight: 600;
+    line-height: 1.2;
+  }
+  
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem); /* 32-56px - Apple HIG heading scale */
+  }
+  
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem); /* 28-40px */
+  }
+  
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem); /* 24-32px */
+  }
+  
+  h4 {
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  h5 {
+    font-size: 1.125rem; /* 18px */
+  }
+  
+  h6 {
+    font-size: 1rem; /* 16px */
+  }
+  
+  /* Body text variations */
+  .body-large {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.6;
+  }
+  
+  .body-small {
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.5;
+  }
+  
+  /* Apple 8pt grid system - base spacing unit */
+  .spacing-unit {
+    --spacing: 8px;
   }
 }
 
 @layer components {
-  /* Hero Button */
+  /* Apple HIG & Samsung One UI Button Standards */
   .btn-hero {
-    @apply bg-gradient-to-r from-primary to-primary-light text-primary-foreground px-8 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105;
+    @apply bg-gradient-to-r from-primary to-primary-light text-primary-foreground font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-xl;
+    min-height: 44px; /* Samsung One UI minimum tap target */
+    min-width: 44px;
+    padding: 12px 24px; /* 8pt grid system */
+    font-size: 17px; /* Apple HIG readable size */
   }
   
   /* Secondary Button */
   .btn-secondary {
-    @apply bg-gradient-to-r from-secondary to-secondary-light text-secondary-foreground px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105;
+    @apply bg-gradient-to-r from-secondary to-secondary-light text-secondary-foreground font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl;
+    min-height: 44px; /* Samsung One UI minimum tap target */
+    min-width: 44px;
+    padding: 10px 20px; /* 8pt grid system */
+    font-size: 16px;
   }
   
-  /* Card Hover */
+  /* Outline Button */
+  .btn-outline {
+    @apply border border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground transition-all duration-300 rounded-xl;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  /* Card Hover - Reduced animation for accessibility */
   .card-hover {
-    @apply transform hover:scale-105 hover:shadow-lg transition-all duration-300;
+    @apply transform hover:scale-[1.02] hover:shadow-lg transition-all duration-300;
   }
   
-  /* Elegant Card */
+  /* Elegant Card - Apple HIG spacing */
   .card-elegant {
     @apply bg-card rounded-xl border border-border shadow-md backdrop-blur-sm;
+    padding: 24px; /* 8pt grid system */
   }
   
   /* Gradient Text */
@@ -150,15 +212,51 @@
     @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
   
-  /* Section Padding */
+  /* Section Padding - Apple 8pt grid */
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    padding: 64px 0; /* 8 * 8px */
   }
   
-  /* Container */
-  .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 96px 0; /* 12 * 8px */
+    }
   }
+  
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding: 128px 0; /* 16 * 8px */
+    }
+  }
+  
+  /* Container - Apple HIG margins */
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+    padding-left: 16px; /* 8pt grid */
+    padding-right: 16px;
+  }
+  
+  @media (min-width: 640px) {
+    .container-custom {
+      padding-left: 24px; /* 8pt grid */
+      padding-right: 24px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container-custom {
+      padding-left: 32px; /* 8pt grid */
+      padding-right: 32px;
+    }
+  }
+  
+  /* Apple HIG spacing utilities */
+  .space-1 { margin: 8px; }
+  .space-2 { margin: 16px; }
+  .space-3 { margin: 24px; }
+  .space-4 { margin: 32px; }
+  .space-5 { margin: 40px; }
+  .space-6 { margin: 48px; }
 }
 
 @layer utilities {

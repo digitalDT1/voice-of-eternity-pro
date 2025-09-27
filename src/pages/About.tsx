@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Award, BookOpen, Users, Heart, Calendar, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import pastorPhoto from "@/assets/pastor-photo.jpg";
+import apostleEdwinPhoto from "@/assets/apostle-edwin.jpg";
 
 const About = () => {
   useEffect(() => {
@@ -27,42 +27,42 @@ const About = () => {
 
   const milestones = [
     {
+      year: "2015",
+      title: "Ministry Foundation",
+      description: "Called to apostolic ministry and began teaching God's Word with deep spiritual insight and oversight."
+    },
+    {
+      year: "2018",
+      title: "Bethel Apostolic Christian Fellowship",
+      description: "Established as Set Man of Bethel Apostolic Christian Fellowship in Warri, Delta State."
+    },
+    {
       year: "2019",
       title: "Voice of Eternity Launch",
-      description: "Started the podcast with a vision to reach hearts globally with biblical truth and practical wisdom."
+      description: "Pioneered Voice of Eternity channel to proclaim God's eternal counsels through inspiring messages and podcasts."
     },
     {
       year: "2020",
-      title: "Community Growth",
-      description: "Reached 10,000 monthly listeners and established a strong online community during challenging times."
-    },
-    {
-      year: "2021",
-      title: "Ministry Expansion",
-      description: "Launched youth mentorship programs and began speaking at conferences nationwide."
+      title: "Youth Revival Impact",
+      description: "Ministry significantly impacted youths, teenagers, and young adults, stirring revival and passion for God."
     },
     {
       year: "2022",
-      title: "Global Impact",
-      description: "Podcast reached listeners in over 25 countries, translating key episodes into multiple languages."
-    },
-    {
-      year: "2023",
-      title: "Books & Resources",
-      description: "Published first book 'Walking in Purpose' and launched comprehensive study guides."
+      title: "Multi-City Ministry",
+      description: "Began traveling from cities to cities and across nations with the gospel marked by many infallible proofs."
     },
     {
       year: "2024",
-      title: "50,000 Listeners",
-      description: "Celebrated reaching 50,000+ monthly listeners and 150+ transformative episodes."
+      title: "Global Digital Ministry",
+      description: "Expanded Voice of Eternity to reach believers worldwide through podcasts, videos, and digital platforms."
     }
   ];
 
   const achievements = [
-    { icon: Award, title: "Master of Divinity", description: "Seminary Graduate with honors" },
-    { icon: BookOpen, title: "Published Author", description: "3 books on spiritual growth" },
-    { icon: Users, title: "Community Leader", description: "15+ years in ministry" },
-    { icon: Heart, title: "Mentor & Coach", description: "Guided 500+ individuals" }
+    { icon: Award, title: "Apostolic Calling", description: "Seasoned Bible teacher with distinct apostolic unction" },
+    { icon: BookOpen, title: "Expository Teaching", description: "Marked by deep scriptural insight and prophetic utterances" },
+    { icon: Users, title: "Set Man", description: "Bethel Apostolic Christian Fellowship Leader" },
+    { icon: Heart, title: "Revival Minister", description: "Healing, baptism of Holy Spirit & youth transformation" }
   ];
 
   return (
@@ -74,30 +74,55 @@ const About = () => {
             <div className="scroll-fade-in">
               <div className="relative">
                 <img 
-                  src={pastorPhoto} 
-                  alt="Pastor David Johnson" 
+                  src={apostleEdwinPhoto} 
+                  alt="Apostle Edwin E. Otejiri" 
                   className="w-full max-w-md mx-auto lg:mx-0 rounded-2xl shadow-elegant"
                 />
                 <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-primary to-secondary p-4 rounded-xl text-white">
-                  <div className="text-2xl font-bold">5+</div>
+                  <div className="text-2xl font-bold">9+</div>
                   <div className="text-sm">Years Ministry</div>
                 </div>
               </div>
             </div>
             
             <div className="scroll-fade-in">
-              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Pastor & Podcast Host</Badge>
+              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Apostle & Voice of Eternity Founder</Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-gradient">
-                Pastor David Johnson
+                Apostle Edwin E. Otejiri
               </h1>
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Called to inspire and equip believers to live purposefully in God's plan. With over 15 years in ministry and a heart for authentic discipleship, Pastor David brings biblical wisdom to life through engaging messages that transform hearts and minds.
-              </p>
+              <div className="body-large text-muted-foreground mb-8 leading-relaxed space-y-4">
+                <p>
+                  <strong>APOSTLE EDWIN E. OTEJIRI</strong> is a seasoned Bible teacher with a distinct apostolic calling upon his life. Entirely devoted to God and His kingdom, He has given himself wholly to the advancement of the gospel and the raising of Believers who are walking in the realities of all that are available in Christ, becoming Kingdom functionaries in every sphere of Life and fulfilling destiny with the Spirit of excellence.
+                </p>
+                <p>
+                  Currently serving as the Set Man of Bethel Apostolic Christian Fellowship, based in Warri, Delta State, his ministry is marked by:
+                </p>
+                <ul className="list-none space-y-2 ml-4">
+                  <li>› Expository teaching of God's Word</li>
+                  <li>› Apostolic unction</li>
+                  <li>› Prophetic utterances</li>
+                  <li>› Baptism of the Holy Spirit</li>
+                  <li>› Healing</li>
+                  <li>› Revival and lots more.</li>
+                </ul>
+                <p>
+                  Apostle Edwin Otejiri leads with deep spiritual insight and oversight, compassion, and a burden to see the reign of righteousness in his generation. His vow is to serve his generation with the life and proofs of the gospel.
+                </p>
+                <p>
+                  He pioneers the voice of Eternity channel. A channel aimed at proclaiming God's eternal counsels through inspiring messages, videos and podcast. Moreso, His ministerial mandate and burdens are summed up in the caption "Voice of Eternity"; proclaiming God's eternal counsels as he travels from cities to cities and also across nations with the gospel of our Lord Jesus marked with many infallible proofs.
+                </p>
+                <p>
+                  Through the help of the Holy Spirit, his ministry has significantly impacted youths, teenagers, and young adults and adults; stirring revival and strong passion in their heart to pursue after God, live for Him and become all that God has ordained for them in eternity past.
+                </p>
+                <p>
+                  He is joyfully married to Mrs. Edwin Emmanuella Otejiri and together they are blessed with two lovely children, Menorah and Ezra.
+                </p>
+              </div>
               
               <div className="grid sm:grid-cols-2 gap-4 mb-8">
                 <div className="flex items-center space-x-3">
                   <MapPin className="h-5 w-5 text-primary" />
-                  <span>Atlanta, Georgia</span>
+                  <span>Warri, Delta State</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Calendar className="h-5 w-5 text-primary" />
@@ -106,7 +131,7 @@ const About = () => {
               </div>
               
               <blockquote className="border-l-4 border-primary pl-6 italic text-lg text-muted-foreground">
-                "My mission is to help every believer discover their divine purpose and walk confidently in God's calling for their life."
+                "My vow is to serve my generation with the life and proofs of the gospel, proclaiming God's eternal counsels with many infallible proofs."
               </blockquote>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import voeLogo from "@/assets/voe-logo-transparent.png";
 
 const navigationItems = [
   { name: "Home", href: "/" },
@@ -39,8 +40,13 @@ export const Navigation = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="text-2xl md:text-3xl font-serif font-bold text-gradient">
+          <Link to="/" className="flex items-center space-x-3">
+            <img 
+              src={voeLogo} 
+              alt="Voice of Eternity Logo" 
+              className="w-8 h-8 md:w-10 md:h-10"
+            />
+            <div className="text-xl md:text-2xl font-serif font-bold text-gradient">
               Voice of Eternity
             </div>
           </Link>
@@ -48,19 +54,20 @@ export const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigationItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`relative px-4 py-2 font-medium transition-all duration-300 ${
-                  location.pathname === item.href
-                    ? "text-primary"
-                    : "text-foreground hover:text-primary"
-                } after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-gradient-to-r after:from-primary after:to-secondary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
-                  location.pathname === item.href ? "after:scale-x-100" : ""
-                }`}
-              >
-                {item.name}
-              </Link>
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`relative px-4 py-2 font-medium transition-all duration-300 ${
+                    location.pathname === item.href
+                      ? "text-primary"
+                      : "text-foreground hover:text-primary"
+                  } after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-gradient-to-r after:from-primary after:to-secondary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
+                    location.pathname === item.href ? "after:scale-x-100" : ""
+                  }`}
+                  style={{ minHeight: '44px', minWidth: '44px' }}
+                >
+                  {item.name}
+                </Link>
             ))}
           </div>
 
@@ -68,7 +75,8 @@ export const Navigation = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-foreground hover:text-primary transition-colors duration-200"
+              className="text-foreground hover:text-primary transition-colors duration-200 rounded-lg"
+              style={{ minHeight: '44px', minWidth: '44px', padding: '10px' }}
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -89,6 +97,7 @@ export const Navigation = () => {
                       ? "bg-primary text-primary-foreground"
                       : "text-foreground hover:bg-accent hover:text-primary"
                   }`}
+                  style={{ minHeight: '44px' }}
                 >
                   {item.name}
                 </Link>
