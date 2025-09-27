@@ -55,7 +55,7 @@ const Index = () => {
               Voice of <span className="text-gradient bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">Eternity</span>
             </h1>
             <p className="text-xl md:text-2xl lg:text-3xl mb-8 text-white/90 animate-slide-up max-w-3xl mx-auto">
-              Inspiring messages that resonate through time, bringing hope, wisdom, and spiritual growth to hearts around the world.
+              Proclaiming God's eternal Counsels, bringing many into the realities of Chirst and raising an army of Consecreted men. 
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-scale-in">
               <Button className="btn-hero group">
