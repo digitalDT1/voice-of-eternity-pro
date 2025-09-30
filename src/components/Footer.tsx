@@ -7,7 +7,7 @@ const Footer = () => {
 
   const quickLinks = [
     { name: "Home", href: "/" },
-    { name: "About Pastor", href: "/about" },
+    { name: "About", href: "/about" },
     { name: "Episodes", href: "/episodes" },
     { name: "Support", href: "/support" },
     { name: "Contact", href: "/contact" },
@@ -65,7 +65,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 text-secondary">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-6 text-white">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -82,13 +82,13 @@ const Footer = () => {
 
           {/* Podcast Platforms */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 text-secondary">Listen On</h3>
+            <h3 className="text-lg font-semibold mb-6 text-white">Listen On</h3>
             <ul className="space-y-3">
               {podcastPlatforms.map((platform) => (
                 <li key={platform.name}>
                   <a
                     href={platform.href}
-                    className="text-white/70 hover:text-white transition-colors duration-200 flex items-center space-x-2 hover:underline"
+                    className="text-white/80 hover:text-white transition-colors duration-200 flex items-center space-x-2 hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -102,13 +102,13 @@ const Footer = () => {
 
           {/* Connect & Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 text-secondary">Connect With Us</h3>
+            <h3 className="text-lg font-semibold mb-6 text-white">Connect With Us</h3>
             <ul className="space-y-3 mb-6">
               {socialLinks.map((social) => (
                 <li key={social.name}>
                   <a
                     href={social.href}
-                    className="text-white/70 hover:text-white transition-colors duration-200 flex items-center space-x-2 hover:underline"
+                    className="text-white/80 hover:text-white transition-colors duration-200 flex items-center space-x-2 hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -120,13 +120,13 @@ const Footer = () => {
             </ul>
             
             <div className="bg-white/10 p-4 rounded-lg">
-              <h4 className="font-medium mb-2 text-secondary">Stay Updated</h4>
+              <h4 className="font-medium mb-2 text-white">Stay Updated</h4>
               <p className="text-white/70 text-sm mb-3">
                 Get notified about new episodes and exclusive content.
               </p>
               <Link 
                 to="/contact"
-                className="inline-flex items-center px-4 py-2 bg-secondary text-primary font-medium rounded-lg hover:bg-secondary-light transition-colors duration-200"
+                className="inline-flex items-center px-4 py-2 bg-secondary text-primary font-medium rounded-lg hover:bg-secondary/90 transition-colors duration-200"
               >
                 Subscribe Now
               </Link>
@@ -164,4 +164,4 @@ const Footer = () => {
   );
 };
 
-export { Footer };
+export default Footer;
