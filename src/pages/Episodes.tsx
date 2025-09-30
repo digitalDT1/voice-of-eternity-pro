@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Play, Calendar, Clock, Search, Filter } from "lucide-react";
+import { Play, Calendar, Clock, Search, Filter, BookOpen, ShoppingCart } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -105,6 +105,37 @@ const Episodes = () => {
     const matchesCategory = selectedCategory === "All" || episode.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  const books = [
+    {
+      id: 1,
+      title: "Walking in the Fullness of Christ",
+      description: "A comprehensive guide to understanding and experiencing the complete work of Christ in your life.",
+      price: "$19.99",
+      featured: true
+    },
+    {
+      id: 2,
+      title: "The Kingdom Functionary",
+      description: "Discovering your role and function in advancing God's kingdom on earth.",
+      price: "$15.99",
+      featured: false
+    },
+    {
+      id: 3,
+      title: "Consecration: The Path to Spiritual Excellence",
+      description: "Biblical principles for living a consecrated life devoted to God's purposes.",
+      price: "$17.99",
+      featured: false
+    },
+    {
+      id: 4,
+      title: "Eternal Counsels",
+      description: "Understanding God's timeless wisdom and applying it to modern life challenges.",
+      price: "$21.99",
+      featured: false
+    }
+  ];
 
   return (
     <div className="min-h-screen pt-20">
@@ -270,6 +301,49 @@ const Episodes = () => {
               </Button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Books Section */}
+      <section className="section-padding">
+        <div className="container-custom">
+          <div className="scroll-fade-in text-center mb-16">
+            <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Ministry Resources</Badge>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gradient mb-6">
+              Books by Apostle Edwin
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Deepen your understanding of God's Word with these transformative books that explore biblical truths and practical application.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {books.map((book) => (
+              <Card key={book.id} className="card-elegant p-6 scroll-fade-in card-hover">
+                <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg mb-4 flex items-center justify-center">
+                  <BookOpen className="h-12 w-12 text-primary" />
+                </div>
+                
+                {book.featured && (
+                  <Badge className="bg-secondary/10 text-secondary border-secondary/20 text-xs mb-2">
+                    Featured
+                  </Badge>
+                )}
+                
+                <h3 className="text-lg font-serif font-semibold mb-2 line-clamp-2">{book.title}</h3>
+                <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{book.description}</p>
+                
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-2xl font-bold text-primary">{book.price}</span>
+                </div>
+                
+                <Button className="w-full btn-secondary group">
+                  <ShoppingCart className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                  Purchase Book
+                </Button>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
     </div>

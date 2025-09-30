@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Heart, Gift, Users, Star, Coffee, Crown } from "lucide-react";
+import { Heart, Gift, Users, Star, Coffee, Crown, Mail, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -78,6 +78,18 @@ const Support = () => {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
               Your support enables us to continue spreading hope, faith, and biblical truth to hearts around the world. Together, we can make an eternal impact.
             </p>
+            
+            {/* Contact info highlighted */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground mb-8">
+              <a href="mailto:edwinotejiriinvite@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Mail className="h-5 w-5" />
+                <span className="font-medium">edwinotejiriinvite@gmail.com</span>
+              </a>
+              <a href="tel:+2348108159472" className="flex items-center gap-2 hover:text-primary transition-colors">
+                <Phone className="h-5 w-5" />
+                <span className="font-medium">+234 810 815 9472</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>

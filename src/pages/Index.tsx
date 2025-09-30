@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Play, Headphones, Heart, ArrowRight } from "lucide-react";
+import { Play, Headphones, Heart, ArrowRight, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -55,7 +55,7 @@ const Index = () => {
               Voice of <span className="text-gradient bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">Eternity</span>
             </h1>
             <p className="text-xl md:text-2xl lg:text-3xl mb-8 text-white/90 animate-slide-up max-w-3xl mx-auto">
-              Proclaiming God's eternal Counsels, bringing many into the realities of Chirst and raising an army of Consecreted men. 
+              Proclaiming God's eternal Counsels, bringing many into the realities of Christ and raising an army of Consecrated men. 
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-scale-in">
               <Button className="btn-hero group">
@@ -66,6 +66,18 @@ const Index = () => {
                 <Headphones className="mr-2 h-5 w-5" />
                 Latest Episode
               </Button>
+            </div>
+
+            {/* Contact info on hero */}
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-white/90 text-sm">
+              <a href="mailto:edwinotejiriinvite@gmail.com" className="flex items-center gap-2 hover:text-secondary transition-colors">
+                <Mail className="h-4 w-4" />
+                <span>edwinotejiriinvite@gmail.com</span>
+              </a>
+              <a href="tel:+2348108159472" className="flex items-center gap-2 hover:text-secondary transition-colors">
+                <Phone className="h-4 w-4" />
+                <span>+234 810 815 9472</span>
+              </a>
             </div>
           </div>
         </div>

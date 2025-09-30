@@ -1,5 +1,6 @@
-import { Heart, Mail, MapPin, ExternalLink } from "lucide-react";
+import { Heart, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import voeLogo from "@/assets/voe-logo-transparent.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -33,22 +34,31 @@ const Footer = () => {
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center space-x-2 mb-6">
-              <div className="text-3xl font-serif font-bold text-secondary">
+            <Link to="/" className="flex items-center space-x-3 mb-6">
+              <img 
+                src={voeLogo} 
+                alt="Voice of Eternity Logo" 
+                className="w-10 h-10"
+              />
+              <div className="text-2xl font-serif font-bold text-white">
                 Voice of Eternity
               </div>
             </Link>
             <p className="text-white/80 mb-6 leading-relaxed">
-              Inspiring messages that resonate through time, bringing hope, wisdom, and spiritual growth to hearts around the world.
+              Proclaiming God's eternal counsels, bringing many into the realities of Christ and raising an army of consecrated men.
             </p>
             <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-white/70">
+              <a href="mailto:edwinotejiriinvite@gmail.com" className="flex items-center space-x-3 text-white hover:text-secondary transition-colors">
                 <Mail className="h-4 w-4" />
-                <span>pastor@voiceeternity.com</span>
-              </div>
+                <span>edwinotejiriinvite@gmail.com</span>
+              </a>
+              <a href="tel:+2348108159472" className="flex items-center space-x-3 text-white hover:text-secondary transition-colors">
+                <Phone className="h-4 w-4" />
+                <span>+234 810 815 9472</span>
+              </a>
               <div className="flex items-center space-x-3 text-white/70">
                 <MapPin className="h-4 w-4" />
-                <span>Atlanta, Georgia</span>
+                <span>Warri, Delta State, Nigeria</span>
               </div>
             </div>
           </div>
@@ -61,7 +71,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-white/70 hover:text-white transition-colors duration-200 hover:underline"
+                    className="text-white hover:text-secondary transition-colors duration-200 hover:underline"
                   >
                     {link.name}
                   </Link>

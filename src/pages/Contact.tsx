@@ -70,20 +70,22 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "pastor@voiceeternity.com",
-      description: "Send us a message anytime"
+      value: "edwinotejiriinvite@gmail.com",
+      description: "Send us a message anytime",
+      link: "mailto:edwinotejiriinvite@gmail.com"
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+1 (555) 123-4567",
-      description: "Call during office hours"
+      value: "+234 810 815 9472",
+      description: "Call during office hours",
+      link: "tel:+2348108159472"
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "Atlanta, Georgia",
-      description: "Based in the heart of Georgia"
+      value: "Warri, Delta State, Nigeria",
+      description: "Based in Warri, Nigeria"
     },
     {
       icon: Clock,
@@ -221,16 +223,29 @@ const Contact = () => {
                 <div className="grid gap-4">
                   {contactInfo.map((info, index) => (
                     <Card key={index} className="card-elegant p-6 card-hover">
-                      <div className="flex items-start space-x-4">
-                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                          <info.icon className="h-6 w-6 text-white" />
+                      {info.link ? (
+                        <a href={info.link} className="flex items-start space-x-4">
+                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                            <info.icon className="h-6 w-6 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold mb-1">{info.title}</h3>
+                            <p className="text-primary font-medium mb-1 hover:underline">{info.value}</p>
+                            <p className="text-muted-foreground text-sm">{info.description}</p>
+                          </div>
+                        </a>
+                      ) : (
+                        <div className="flex items-start space-x-4">
+                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                            <info.icon className="h-6 w-6 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-semibold mb-1">{info.title}</h3>
+                            <p className="text-primary font-medium mb-1">{info.value}</p>
+                            <p className="text-muted-foreground text-sm">{info.description}</p>
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="text-lg font-semibold mb-1">{info.title}</h3>
-                          <p className="text-primary font-medium mb-1">{info.value}</p>
-                          <p className="text-muted-foreground text-sm">{info.description}</p>
-                        </div>
-                      </div>
+                      )}
                     </Card>
                   ))}
                 </div>
