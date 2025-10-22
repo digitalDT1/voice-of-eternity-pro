@@ -1,5 +1,6 @@
 import { Heart, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import { FaFacebookF, FaInstagram, FaYoutube, FaTiktok, FaTelegramPlane } from "react-icons/fa";
 import voeLogo from "@/assets/voe-logo-transparent.png";
 
 const Footer = () => {
@@ -21,11 +22,11 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { name: "Facebook", href: "https://www.facebook.com/Pst.EdwinOtejiri" },
-    { name: "YouTube", href: "https://www.youtube.com/@Apostleedwine.otejiri1757" },
-    { name: "TikTok", href: "https://www.tiktok.com/@apostle.edwin.e?_t=ZS-90kPO7qv9O6&_r=1" },
-    { name: "Instagram", href: "https://www.instagram.com/edwinotejiri/" },
-    { name: "Telegram", href: "#" },
+    { name: "Facebook", href: "https://www.facebook.com/Pst.EdwinOtejiri", icon: FaFacebookF, active: true },
+    { name: "Instagram", href: "https://www.instagram.com/edwinotejiri/", icon: FaInstagram, active: true },
+    { name: "YouTube", href: "https://www.youtube.com/@Apostleedwine.otejiri1757", icon: FaYoutube, active: true },
+    { name: "TikTok", href: "https://www.tiktok.com/@apostle.edwin.e?_t=ZS-90kPO7qv9O6&_r=1", icon: FaTiktok, active: true },
+    { name: "Telegram", href: "#", icon: FaTelegramPlane, active: false },
   ];
 
   return (
@@ -111,21 +112,34 @@ const Footer = () => {
           {/* Connect & Newsletter */}
           <div>
             <h3 className="text-lg font-semibold mb-6 text-white">Connect With Us</h3>
-            <ul className="space-y-3 mb-6">
+            
+            {/* Social Media Icons */}
+            <div className="flex items-center gap-4 mb-6">
               {socialLinks.map((social) => (
-                <li key={social.name}>
+                social.active ? (
                   <a
+                    key={social.name}
                     href={social.href}
-                    className="text-white/80 hover:text-white transition-colors duration-200 flex items-center space-x-2 hover:underline"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={social.name}
+                    className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
                   >
-                    <span>{social.name}</span>
-                    <ExternalLink className="h-3 w-3" />
+                    <social.icon size={20} className="text-white" />
                   </a>
-                </li>
+                ) : (
+                  <div
+                    key={social.name}
+                    className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center relative group cursor-not-allowed"
+                  >
+                    <social.icon size={20} className="text-white/30" />
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white/90 text-primary text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      Coming Soon
+                    </div>
+                  </div>
+                )
               ))}
-            </ul>
+            </div>
             
             <div className="bg-white/10 p-4 rounded-lg">
               <h4 className="font-medium mb-2 text-white">Stay Updated</h4>
