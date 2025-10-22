@@ -95,10 +95,10 @@ const Index = () => {
         <div className="container-custom">
           <div className="scroll-fade-in text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-gradient mb-6">
-              Transforming Lives Through Faith
+              Transforming life true God's enternal Counsel
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Join thousands of listeners worldwide as we explore timeless biblical truths and practical wisdom for everyday living.
+              Join thousands of listeners world wild as we in ravel God's enternal counsels and explore timless biblical truth
             </p>
           </div>
 
@@ -195,11 +195,6 @@ const Index = () => {
               <Link to="/about">
                 <Button className="btn-hero">
                   Learn More About Pastor
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button variant="outline" className="px-8 py-4">
-                  Get In Touch
                 </Button>
               </Link>
             </div>

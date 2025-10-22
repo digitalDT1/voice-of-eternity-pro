@@ -14,17 +14,18 @@ const Footer = () => {
   ];
 
   const podcastPlatforms = [
-    { name: "Spotify", href: "#" },
-    { name: "Apple Podcasts", href: "#" },
-    { name: "YouTube", href: "#" },
-    { name: "Google Podcasts", href: "#" },
+    { name: "YouTube", href: "https://www.youtube.com/@Apostleedwine.otejiri1757", active: true },
+    { name: "Spotify", href: "#", active: false },
+    { name: "Apple Podcasts", href: "#", active: false },
+    { name: "Google Podcasts", href: "#", active: false },
   ];
 
   const socialLinks = [
-    { name: "Facebook", href: "#" },
-    { name: "Instagram", href: "#" },
-    { name: "Twitter", href: "#" },
-    { name: "YouTube", href: "#" },
+    { name: "Facebook", href: "https://www.facebook.com/Pst.EdwinOtejiri" },
+    { name: "YouTube", href: "https://www.youtube.com/@Apostleedwine.otejiri1757" },
+    { name: "TikTok", href: "https://www.tiktok.com/@apostle.edwin.e?_t=ZS-90kPO7qv9O6&_r=1" },
+    { name: "Instagram", href: "https://www.instagram.com/edwinotejiri/" },
+    { name: "Telegram", href: "#" },
   ];
 
   return (
@@ -86,15 +87,22 @@ const Footer = () => {
             <ul className="space-y-3">
               {podcastPlatforms.map((platform) => (
                 <li key={platform.name}>
-                  <a
-                    href={platform.href}
-                    className="text-white/80 hover:text-white transition-colors duration-200 flex items-center space-x-2 hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span>{platform.name}</span>
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
+                  {platform.active ? (
+                    <a
+                      href={platform.href}
+                      className="text-white/80 hover:text-white transition-colors duration-200 flex items-center space-x-2 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span>{platform.name}</span>
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  ) : (
+                    <div className="text-white/50 flex items-center space-x-2">
+                      <span>{platform.name}</span>
+                      <span className="text-xs text-white/40">(Coming Soon)</span>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>

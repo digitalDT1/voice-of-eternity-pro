@@ -286,16 +286,16 @@ const Contact = () => {
               </div>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span>Monday - Thursday</span>
-                  <span className="font-medium">9:00 AM - 5:00 PM EST</span>
+                  <span>Tuesday - Friday</span>
+                  <span className="font-medium">9:00 AM - 3:00 PM</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Friday</span>
-                  <span className="font-medium">9:00 AM - 3:00 PM EST</span>
+                  <span>Monday</span>
+                  <span className="font-medium">Closed</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Weekends</span>
-                  <span className="font-medium">Emergency Only</span>
+                  <span className="font-medium">Closed</span>
                 </div>
               </div>
             </Card>
@@ -308,7 +308,7 @@ const Contact = () => {
                 <h3 className="text-2xl font-serif font-bold">Response Promise</h3>
               </div>
               <p className="text-muted-foreground leading-relaxed">
-                We value every message and strive to respond within 24-48 hours. For urgent prayer requests or emergencies, please call our office directly. Your spiritual wellbeing matters to us.
+                We value every message and strive to respond within 24-48 hours. For urgent prayer requests, please call our office during office hours (Tuesday - Friday, 9 AM - 3 PM). Your spiritual wellbeing matters to us.
               </p>
             </Card>
           </div>

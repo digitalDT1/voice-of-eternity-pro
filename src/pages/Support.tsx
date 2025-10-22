@@ -25,36 +25,69 @@ const Support = () => {
     return () => observer.disconnect();
   }, []);
 
-  const supportTiers = [
+  const manualSupportTiers = [
     {
       name: "Coffee Supporter",
       amount: "$5",
       frequency: "One-time",
       icon: Coffee,
-      description: "Buy Pastor David a coffee and show your appreciation for the ministry.",
+      description: "Buy Apostle Edwin a coffee and show your appreciation for the ministry.",
       benefits: ["Thank you message", "Prayer request inclusion"],
       popular: false,
       color: "from-amber-500 to-orange-500"
     },
     {
-      name: "Monthly Partner",
-      amount: "$15",
-      frequency: "Monthly", 
-      icon: Heart,
-      description: "Join our monthly partnership program and help sustain the podcast ministry.",
-      benefits: ["All previous benefits", "Exclusive monthly newsletter", "Early episode access"],
-      popular: true,
+      name: "Blessing Seed",
+      amount: "$25",
+      frequency: "One-time",
+      icon: Gift,
+      description: "Sow a one-time blessing into the ministry and help us expand our reach.",
+      benefits: ["Thank you message", "Prayer coverage", "Ministry updates"],
+      popular: false,
       color: "from-primary to-primary-light"
     },
     {
-      name: "Champion Supporter",
+      name: "Kingdom Investment",
+      amount: "$100",
+      frequency: "One-time",
+      icon: Crown,
+      description: "Make a significant investment in spreading God's eternal counsels.",
+      benefits: ["Personal thank you", "Exclusive prayer coverage", "Quarterly ministry updates"],
+      popular: false,
+      color: "from-secondary to-secondary-light"
+    }
+  ];
+
+  const monthlySupportTiers = [
+    {
+      name: "Faith Partner",
+      amount: "$10",
+      frequency: "Monthly", 
+      icon: Heart,
+      description: "Become a monthly faith partner and help sustain the Voice of Eternity ministry.",
+      benefits: ["Monthly newsletter", "Prayer request inclusion", "Early content access"],
+      popular: false,
+      color: "from-primary to-primary-light"
+    },
+    {
+      name: "Kingdom Builder",
+      amount: "$25",
+      frequency: "Monthly",
+      icon: Star,
+      description: "Join as a Kingdom Builder and play a vital role in raising consecrated men for God.",
+      benefits: ["All previous benefits", "Exclusive monthly updates", "Priority prayer requests"],
+      popular: true,
+      color: "from-secondary to-secondary-light"
+    },
+    {
+      name: "Champion Partner",
       amount: "$50",
       frequency: "Monthly",
       icon: Crown,
-      description: "Become a champion supporter and help us reach even more souls with God's truth.",
-      benefits: ["All previous benefits", "Quarterly video call", "Custom prayer request", "Ministry updates"],
+      description: "Champion the advancement of God's eternal counsels through monthly partnership.",
+      benefits: ["All previous benefits", "Quarterly video call", "Special ministry access"],
       popular: false,
-      color: "from-secondary to-secondary-light"
+      color: "from-primary to-secondary"
     }
   ];
 
@@ -116,27 +149,22 @@ const Support = () => {
         </div>
       </section>
 
-      {/* Support Options */}
+      {/* Manual Support Options */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="scroll-fade-in text-center mb-16">
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">One-Time Donations</Badge>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-gradient mb-6">
-              Choose Your Support Level
+              Manual Support
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Every contribution, no matter the size, helps us continue this vital ministry and reach more hearts with God's love.
+              Make a one-time donation to support the Voice of Eternity ministry and help spread God's eternal counsels.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {supportTiers.map((tier, index) => (
-              <Card key={index} className={`card-elegant p-8 scroll-fade-in relative overflow-hidden ${tier.popular ? 'ring-2 ring-primary shadow-glow' : ''}`}>
-                {tier.popular && (
-                  <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 text-sm font-medium">
-                    Most Popular
-                  </div>
-                )}
-                
+            {manualSupportTiers.map((tier, index) => (
+              <Card key={index} className="card-elegant p-8 scroll-fade-in card-hover">
                 <div className={`w-16 h-16 bg-gradient-to-r ${tier.color} rounded-full flex items-center justify-center mb-6`}>
                   <tier.icon className="h-8 w-8 text-white" />
                 </div>
@@ -144,7 +172,7 @@ const Support = () => {
                 <h3 className="text-2xl font-serif font-bold mb-2">{tier.name}</h3>
                 <div className="flex items-baseline mb-2">
                   <span className="text-4xl font-bold text-primary">{tier.amount}</span>
-                  <span className="text-muted-foreground ml-2">/{tier.frequency.toLowerCase()}</span>
+                  <span className="text-muted-foreground ml-2 text-sm">{tier.frequency}</span>
                 </div>
                 
                 <p className="text-muted-foreground mb-6">{tier.description}</p>
@@ -158,11 +186,64 @@ const Support = () => {
                   ))}
                 </ul>
                 
+                <Button className="w-full btn-secondary" size="lg">
+                  Donate {tier.amount}
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Monthly Subscription Options */}
+      <section className="section-padding bg-accent/30">
+        <div className="container-custom">
+          <div className="scroll-fade-in text-center mb-16">
+            <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Monthly Partnership</Badge>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gradient mb-6">
+              Monthly Subscription
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Become a monthly partner and help sustain the Voice of Eternity ministry with automatic monthly contributions.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {monthlySupportTiers.map((tier, index) => (
+              <Card key={index} className={`card-elegant p-8 scroll-fade-in relative overflow-hidden ${tier.popular ? 'ring-2 ring-secondary shadow-glow' : ''}`}>
+                {tier.popular && (
+                  <div className="absolute top-0 right-0 bg-secondary text-primary px-4 py-1 text-sm font-bold">
+                    Most Popular
+                  </div>
+                )}
+                
+                <div className={`w-16 h-16 bg-gradient-to-r ${tier.color} rounded-full flex items-center justify-center mb-6`}>
+                  <tier.icon className="h-8 w-8 text-white" />
+                </div>
+                
+                <h3 className="text-2xl font-serif font-bold mb-2">{tier.name}</h3>
+                <div className="flex items-baseline mb-2">
+                  <span className="text-4xl font-bold text-primary">{tier.amount}</span>
+                  <span className="text-muted-foreground ml-2">/month</span>
+                </div>
+                <p className="text-xs text-muted-foreground mb-4">Auto-renews monthly</p>
+                
+                <p className="text-muted-foreground mb-6">{tier.description}</p>
+                
+                <ul className="space-y-3 mb-8">
+                  {tier.benefits.map((benefit, benefitIndex) => (
+                    <li key={benefitIndex} className="flex items-center space-x-2">
+                      <Heart className="h-4 w-4 text-secondary flex-shrink-0" />
+                      <span className="text-sm">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+                
                 <Button 
                   className={`w-full ${tier.popular ? 'btn-hero' : 'btn-secondary'}`}
                   size="lg"
                 >
-                  Support {tier.amount}
+                  Subscribe {tier.amount}/mo
                 </Button>
               </Card>
             ))}

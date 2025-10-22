@@ -86,10 +86,11 @@ export const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.href}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className={`relative px-4 py-2 font-medium transition-all duration-300 ${
                     location.pathname === item.href
                       ? "text-primary"
-                      : "text-white dark:text-foreground hover:text-secondary"
+                      : "text-muted-foreground dark:text-white hover:text-secondary"
                   } after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-gradient-to-r after:from-primary after:to-secondary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left ${
                     location.pathname === item.href ? "after:scale-x-100" : ""
                   }`}
@@ -121,6 +122,7 @@ export const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.href}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className={`block px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
                     location.pathname === item.href
                       ? "bg-primary text-primary-foreground"
