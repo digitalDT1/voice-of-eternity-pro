@@ -44,13 +44,13 @@ export const Navigation = () => {
       <div className="bg-primary text-white py-2">
         <div className="container-custom flex flex-wrap items-center justify-between text-sm gap-2">
           <div className="flex items-center gap-4">
-            <a href="mailto:edwinotejiriinvite@gmail.com" className="flex items-center gap-1 hover:text-secondary transition-colors">
+            <a href="mailto:edwinteejay@gmail.com" className="flex items-center gap-1 hover:text-secondary transition-colors">
               <Mail className="h-3 w-3" />
-              <span className="hidden sm:inline">edwinotejiriinvite@gmail.com</span>
+              <span className="hidden sm:inline">edwinteejay@gmail.com</span>
             </a>
-            <a href="tel:+2348108159472" className="flex items-center gap-1 hover:text-secondary transition-colors">
+            <a href="tel:+2347060974266" className="flex items-center gap-1 hover:text-secondary transition-colors">
               <Phone className="h-3 w-3" />
-              <span>+234 810 815 9472</span>
+              <span>+234 706 097 4266</span>
             </a>
           </div>
           <Button

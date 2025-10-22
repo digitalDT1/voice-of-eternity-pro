@@ -114,13 +114,13 @@ const Support = () => {
             
             {/* Contact info highlighted */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground mb-8">
-              <a href="mailto:edwinotejiriinvite@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <a href="mailto:edwinteejay@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Mail className="h-5 w-5" />
-                <span className="font-medium">edwinotejiriinvite@gmail.com</span>
+                <span className="font-medium">edwinteejay@gmail.com</span>
               </a>
-              <a href="tel:+2348108159472" className="flex items-center gap-2 hover:text-primary transition-colors">
+              <a href="tel:+2347060974266" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Phone className="h-5 w-5" />
-                <span className="font-medium">+234 810 815 9472</span>
+                <span className="font-medium">+234 706 097 4266</span>
               </a>
             </div>
           </div>

@@ -70,13 +70,13 @@ const Index = () => {
 
             {/* Contact info on hero */}
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-white/90 text-sm">
-              <a href="mailto:edwinotejiriinvite@gmail.com" className="flex items-center gap-2 hover:text-secondary transition-colors">
+              <a href="mailto:edwinteejay@gmail.com" className="flex items-center gap-2 hover:text-secondary transition-colors">
                 <Mail className="h-4 w-4" />
-                <span>edwinotejiriinvite@gmail.com</span>
+                <span>edwinteejay@gmail.com</span>
               </a>
-              <a href="tel:+2348108159472" className="flex items-center gap-2 hover:text-secondary transition-colors">
+              <a href="tel:+2347060974266" className="flex items-center gap-2 hover:text-secondary transition-colors">
                 <Phone className="h-4 w-4" />
-                <span>+234 810 815 9472</span>
+                <span>+234 706 097 4266</span>
               </a>
             </div>
           </div>

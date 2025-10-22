@@ -70,16 +70,16 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "edwinotejiriinvite@gmail.com",
+      value: "edwinteejay@gmail.com",
       description: "Send us a message anytime",
-      link: "mailto:edwinotejiriinvite@gmail.com"
+      link: "mailto:edwinteejay@gmail.com"
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+234 810 815 9472",
+      value: "+234 706 097 4266",
       description: "Call during office hours",
-      link: "tel:+2348108159472"
+      link: "tel:+2347060974266"
     },
     {
       icon: MapPin,

@@ -49,13 +49,13 @@ const Footer = () => {
               Proclaiming God's eternal counsels, bringing many into the realities of Christ and raising an army of consecrated men.
             </p>
             <div className="space-y-3">
-              <a href="mailto:edwinotejiriinvite@gmail.com" className="flex items-center space-x-3 text-white hover:text-secondary transition-colors">
+              <a href="mailto:edwinteejay@gmail.com" className="flex items-center space-x-3 text-white hover:text-secondary transition-colors">
                 <Mail className="h-4 w-4" />
-                <span>edwinotejiriinvite@gmail.com</span>
+                <span>edwinteejay@gmail.com</span>
               </a>
-              <a href="tel:+2348108159472" className="flex items-center space-x-3 text-white hover:text-secondary transition-colors">
+              <a href="tel:+2347060974266" className="flex items-center space-x-3 text-white hover:text-secondary transition-colors">
                 <Phone className="h-4 w-4" />
-                <span>+234 810 815 9472</span>
+                <span>+234 706 097 4266</span>
               </a>
               <div className="flex items-center space-x-3 text-white/70">
                 <MapPin className="h-4 w-4" />
