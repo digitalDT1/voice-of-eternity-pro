@@ -3,12 +3,42 @@ import { Link } from "react-router-dom";
 import { Play, Headphones, Heart, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import voeLogo from "@/assets/voe-logo-bg.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
+import pastorPhoto from "@/assets/pastor-photo.jpg";
+
+interface HeroSlide {
+  id: number;
+  background: string;
+  label: string;
+  titleLine1: string;
+  titleLine2: string;
+  tagline: string;
+}
+
+const heroSlides: HeroSlide[] = [
+  {
+    id: 1,
+    background: voeLogo,
+    label: "Ministry",
+    titleLine1: "VOICE OF",
+    titleLine2: "ETERNITY",
+    tagline: "Proclaiming God's eternal Counsels to the nations"
+  },
+  {
+    id: 2,
+    background: heroBg,
+    label: "Apostle",
+    titleLine1: "EDWIN",
+    titleLine2: "OTEJIRI",
+    tagline: "Proclaiming God's eternal Counsels, bringing many into the realities of Christ"
+  }
+];
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
-  const [currentSlide, setCurrentSlide] = useState(2);
-  const totalSlides = 3;
+  const [currentSlide, setCurrentSlide] = useState(1);
+  const totalSlides = heroSlides.length;
 
   useEffect(() => {
     const observerOptions = {
@@ -45,14 +75,23 @@ const Index = () => {
         ref={heroRef}
         className="relative h-screen flex items-center overflow-hidden"
       >
-        {/* Background Image with Desaturation */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${heroBg})`,
-            filter: 'grayscale(70%) brightness(0.6)',
-          }}
-        />
+      {/* Slide Backgrounds */}
+        {heroSlides.map((slide, index) => (
+          <div 
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              currentSlide === slide.id ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url(${slide.background})`,
+                filter: 'grayscale(70%) brightness(0.6)',
+              }}
+            />
+          </div>
+        ))}
         
         {/* Left to Right Gradient Overlay */}
         <div 
@@ -63,37 +102,44 @@ const Index = () => {
         />
 
         {/* Hero Content - Right Aligned */}
-        <div className="container-custom relative z-10 h-full flex items-center">
-          <div className="w-full flex justify-end">
-            <div className="max-w-xl text-right pr-4 md:pr-8 lg:pr-16">
-              {/* Apostle Label with Line */}
-              <div className="flex items-center justify-end gap-4 mb-8 animate-fade-in">
-                <div className="h-[1px] w-16 bg-white/50"></div>
-                <span className="text-xs tracking-[0.3em] uppercase text-white/80 font-light">
-                  Apostle
-                </span>
+        {heroSlides.map((slide) => (
+          <div 
+            key={slide.id}
+            className={`container-custom absolute inset-0 z-10 flex items-center transition-all duration-700 ${
+              currentSlide === slide.id ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'
+            }`}
+          >
+            <div className="w-full flex justify-end">
+              <div className="max-w-xl text-right pr-4 md:pr-8 lg:pr-16">
+                {/* Label with Line */}
+                <div className="flex items-center justify-end gap-4 mb-8">
+                  <div className="h-[1px] w-16 bg-white/50"></div>
+                  <span className="text-xs tracking-[0.3em] uppercase text-white/80 font-light">
+                    {slide.label}
+                  </span>
+                </div>
+
+                {/* Large Heading */}
+                <h1>
+                  <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-white leading-[0.9] tracking-tight">
+                    {slide.titleLine1}
+                  </span>
+                  <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-white leading-[0.9] tracking-tight mt-2">
+                    {slide.titleLine2}
+                  </span>
+                </h1>
+
+                {/* Tagline */}
+                <p className="mt-8 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto">
+                  {slide.tagline}
+                </p>
               </div>
-
-              {/* Large Name Heading */}
-              <h1 className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-white leading-[0.9] tracking-tight">
-                  EDWIN
-                </span>
-                <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-white leading-[0.9] tracking-tight mt-2">
-                  OTEJIRI
-                </span>
-              </h1>
-
-              {/* Tagline */}
-              <p className="mt-8 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                Proclaiming God's eternal Counsels, bringing many into the realities of Christ
-              </p>
             </div>
           </div>
-        </div>
+        ))}
 
         {/* Bottom Left - Watch Live Button */}
-        <div className="absolute bottom-12 left-8 md:left-16 z-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+        <div className="absolute bottom-12 left-8 md:left-16 z-10">
           <a 
             href="https://www.youtube.com/@Apostleedwine.otejiri1757" 
             target="_blank" 
@@ -110,7 +156,7 @@ const Index = () => {
         </div>
 
         {/* Bottom Right - Slide Indicator */}
-        <div className="absolute bottom-12 right-8 md:right-16 z-10 flex items-center gap-4 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+        <div className="absolute bottom-12 right-8 md:right-16 z-10 flex items-center gap-4">
           <span className="text-sm text-white/60 font-light tracking-wider">
             {String(currentSlide).padStart(2, '0')}/{String(totalSlides).padStart(2, '0')}
           </span>
