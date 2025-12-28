@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingCart, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 import voeLogo from "@/assets/voe-logo-transparent.png";
 import { Button } from "@/components/ui/button";
 
@@ -12,19 +13,30 @@ const navigationItems = [
   { name: "Contact", href: "/contact" },
 ];
 
+// Pages with dark hero sections that need light text
+const darkHeroPages = ["/", "/about", "/episodes", "/support", "/contact"];
+
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showFloating, setShowFloating] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Check if current page has a dark hero section
+  const hasDarkHero = darkHeroPages.includes(location.pathname);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setScrolled(scrollY > 50);
-      // Show floating nav after scrolling past hero (100vh)
-      setShowFloating(scrollY > window.innerHeight * 0.8);
+      // Show floating nav after scrolling 300px on all pages
+      setShowFloating(scrollY > 300);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -35,15 +47,19 @@ export const Navigation = () => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  // Determine if we should use transparent style (only on home page when not scrolled)
-  const isTransparent = isHomePage && !scrolled;
+  // Determine if we should use transparent style with light text
+  const isTransparent = hasDarkHero && !scrolled;
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <>
-      {/* Main Navigation - Hide when floating nav appears on homepage */}
+      {/* Main Navigation - Hide when floating nav appears */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          showFloating && isHomePage
+          showFloating
             ? "opacity-0 -translate-y-full pointer-events-none"
             : "opacity-100 translate-y-0"
         } ${
@@ -59,7 +75,7 @@ export const Navigation = () => {
               <img 
                 src={voeLogo} 
                 alt="Voice of Eternity Logo" 
-                className="w-10 h-10 md:w-12 md:h-12"
+                className={`w-10 h-10 md:w-12 md:h-12 ${isTransparent ? "brightness-0 invert" : ""}`}
               />
             </Link>
 
@@ -87,8 +103,23 @@ export const Navigation = () => {
               </div>
             </div>
 
-            {/* Right Side - Cart & Partnership */}
-            <div className="hidden md:flex items-center space-x-6 flex-shrink-0">
+            {/* Right Side - Theme Toggle, Cart & Partnership */}
+            <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
+              {/* Theme Toggle */}
+              {mounted && (
+                <button 
+                  onClick={toggleTheme}
+                  className={`p-2 rounded-full transition-colors duration-300 ${
+                    isTransparent 
+                      ? "text-white hover:bg-white/10" 
+                      : "text-foreground hover:bg-accent"
+                  }`}
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                </button>
+              )}
+              
               <button 
                 className={`transition-colors duration-300 ${
                   isTransparent ? "text-white hover:text-white/70" : "text-foreground hover:text-primary"
@@ -111,7 +142,21 @@ export const Navigation = () => {
             </div>
 
             {/* Mobile menu button */}
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center gap-2">
+              {/* Mobile Theme Toggle */}
+              {mounted && (
+                <button 
+                  onClick={toggleTheme}
+                  className={`p-2 rounded-full transition-colors duration-300 ${
+                    isTransparent 
+                      ? "text-white hover:bg-white/10" 
+                      : "text-foreground hover:bg-accent"
+                  }`}
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                </button>
+              )}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={`transition-colors duration-200 rounded-lg p-2 ${
@@ -156,17 +201,17 @@ export const Navigation = () => {
         </div>
       </nav>
 
-      {/* Floating Navigation - Appears after scrolling past hero */}
+      {/* Floating Navigation - Appears after scrolling on all pages */}
       <nav
         className={`fixed top-4 left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 ${
-          showFloating && isHomePage
+          showFloating
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
         <div className="bg-background/95 backdrop-blur-xl shadow-2xl rounded-full px-3 py-2 border border-border">
           <div className="flex items-center gap-1">
-            {/* Logo - More visible */}
+            {/* Logo */}
             <Link 
               to="/" 
               className="flex items-center justify-center w-12 h-12 rounded-full bg-primary hover:bg-primary/90 transition-colors"
@@ -199,6 +244,17 @@ export const Navigation = () => {
 
             {/* Divider */}
             <div className="w-[1px] h-6 bg-border mx-2"></div>
+
+            {/* Theme Toggle */}
+            {mounted && (
+              <button 
+                onClick={toggleTheme}
+                className="flex items-center justify-center w-10 h-10 rounded-full text-foreground hover:text-primary hover:bg-accent transition-all"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </button>
+            )}
 
             {/* Cart */}
             <button 
