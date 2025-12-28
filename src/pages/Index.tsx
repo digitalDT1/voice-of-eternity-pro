@@ -3,14 +3,28 @@ import { Link } from "react-router-dom";
 import { Play, Headphones, Heart, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { HeroCarousel } from "@/components/HeroCarousel";
+import { HeroTextSlider } from "@/components/HeroTextSlider";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import heroBg from "@/assets/hero-bg.jpg";
-import pastorPhoto from "@/assets/pastor-photo.jpg";
-import apostleEdwin from "@/assets/apostle-edwin.jpg";
 
-// Hero images for carousel
-const heroImages = [heroBg, pastorPhoto, apostleEdwin];
+// Text slides for the hero
+const heroTexts = [
+  {
+    line1: "EDWIN",
+    line2: "OTEJIRI",
+    tagline: "Proclaiming God's eternal Counsels, bringing many into the realities of Christ"
+  },
+  {
+    line1: "VOICE OF",
+    line2: "ETERNITY",
+    tagline: "Transforming lives through the power of God's unchanging Word"
+  },
+  {
+    line1: "DIVINE",
+    line2: "PURPOSE",
+    tagline: "Awakening destinies and igniting passion for the Kingdom"
+  }
+];
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -18,7 +32,7 @@ const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const totalSlides = heroImages.length;
+  const totalSlides = heroTexts.length;
 
   // Entrance animation trigger
   useEffect(() => {
@@ -74,19 +88,20 @@ const Index = () => {
         className="relative h-screen flex items-center overflow-hidden"
         style={{ position: 'sticky', top: 0, zIndex: 0 }}
       >
-        {/* Background Image Carousel with Parallax */}
-        <HeroCarousel 
-          images={heroImages}
-          interval={6000}
-          currentSlide={currentSlide}
-          setCurrentSlide={setCurrentSlide}
-          heroScale={heroScale}
-          heroOpacity={heroOpacity}
+        {/* Single Background Image with Parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-100"
+          style={{
+            backgroundImage: `url(${heroBg})`,
+            filter: 'grayscale(70%) brightness(0.6)',
+            transform: `scale(${heroScale})`,
+            opacity: heroOpacity
+          }} 
         />
         
         {/* Left to Right Gradient Overlay */}
         <div 
-          className="absolute inset-0" 
+          className="absolute inset-0 z-[1]" 
           style={{
             background: 'linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%)',
             opacity: heroOpacity
@@ -103,52 +118,13 @@ const Index = () => {
           }}
         >
           <div className="w-full flex justify-end">
-            <div className="max-w-xl text-right pr-4 md:pr-8 lg:pr-16">
-              {/* Apostle Label with Line - Animated */}
-              <div 
-                className={`flex items-center justify-end gap-4 mb-8 transition-all duration-1000 ease-out ${
-                  isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-                }`}
-                style={{ transitionDelay: '200ms' }}
-              >
-                <div className={`h-[1px] bg-white/50 transition-all duration-1000 ease-out ${
-                  isLoaded ? 'w-16' : 'w-0'
-                }`} style={{ transitionDelay: '600ms' }}></div>
-                <span className="text-xs tracking-[0.3em] uppercase text-white/80 font-light">
-                  Apostle
-                </span>
-              </div>
-
-              {/* Large Name Heading - Staggered Animation */}
-              <h1>
-                <span 
-                  className={`block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-white leading-[0.9] tracking-tight transition-all duration-1000 ease-out ${
-                    isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                  }`}
-                  style={{ transitionDelay: '400ms' }}
-                >
-                  EDWIN
-                </span>
-                <span 
-                  className={`block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-white leading-[0.9] tracking-tight mt-2 transition-all duration-1000 ease-out ${
-                    isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                  }`}
-                  style={{ transitionDelay: '600ms' }}
-                >
-                  OTEJIRI
-                </span>
-              </h1>
-
-              {/* Tagline - Fade Up */}
-              <p 
-                className={`mt-8 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto transition-all duration-1000 ease-out ${
-                  isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: '800ms' }}
-              >
-                Proclaiming God's eternal Counsels, bringing many into the realities of Christ
-              </p>
-            </div>
+            <HeroTextSlider 
+              texts={heroTexts}
+              interval={5000}
+              currentSlide={currentSlide}
+              setCurrentSlide={setCurrentSlide}
+              isLoaded={isLoaded}
+            />
           </div>
         </div>
 
