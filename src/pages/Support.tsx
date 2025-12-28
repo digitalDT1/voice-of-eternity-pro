@@ -1,10 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Heart, Gift, Users, Star, Coffee, Crown, Mail, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 const Support = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
@@ -101,9 +108,9 @@ const Support = () => {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-subtle">
+      <section className="section-padding bg-gradient-subtle overflow-hidden">
         <div className="container-custom">
-          <div className="text-center scroll-fade-in">
+          <div className={`text-center transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Ministry Support</Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gradient mb-6">
               Partner With Us
@@ -113,7 +120,7 @@ const Support = () => {
             </p>
             
             {/* Contact info highlighted */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground mb-8">
+            <div className={`flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground mb-8 transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
               <a href="mailto:edwinteejay@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
                 <Mail className="h-5 w-5" />
                 <span className="font-medium">edwinteejay@gmail.com</span>

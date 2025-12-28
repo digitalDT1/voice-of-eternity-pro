@@ -56,11 +56,11 @@ export const Navigation = () => {
 
   return (
     <>
-      {/* Main Navigation - Hide when floating nav appears */}
+      {/* Main Navigation - Hide when floating nav appears (desktop only) */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          showFloating
-            ? "opacity-0 -translate-y-full pointer-events-none"
+          showFloating && !isOpen
+            ? "lg:opacity-0 lg:-translate-y-full lg:pointer-events-none opacity-100 translate-y-0"
             : "opacity-100 translate-y-0"
         } ${
           isTransparent
@@ -201,10 +201,10 @@ export const Navigation = () => {
         </div>
       </nav>
 
-      {/* Floating Navigation - Appears after scrolling on all pages */}
+      {/* Floating Navigation - Desktop only, hidden when mobile menu is open */}
       <nav
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 ${
-          showFloating
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 hidden lg:block ${
+          showFloating && !isOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
         }`}

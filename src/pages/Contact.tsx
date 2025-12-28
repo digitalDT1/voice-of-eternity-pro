@@ -15,7 +15,13 @@ const Contact = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const observerOptions = {
@@ -116,9 +122,9 @@ const Contact = () => {
   return (
     <div className="min-h-screen pt-20">
       {/* Header */}
-      <section className="section-padding bg-gradient-subtle">
+      <section className="section-padding bg-gradient-subtle overflow-hidden">
         <div className="container-custom">
-          <div className="text-center scroll-fade-in">
+          <div className={`text-center transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gradient mb-6">
               Get In Touch
             </h1>

@@ -6,6 +6,12 @@ import apostleEdwinPhoto from "@/assets/apostle-edwin.jpg";
 
 const About = () => {
   const [expanded, setExpanded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const observerOptions = {
@@ -88,18 +94,18 @@ const About = () => {
  return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-subtle">
+      <section className="section-padding bg-gradient-subtle overflow-hidden">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Image */}
-            <div className="scroll-fade-in">
+            <div className={`transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
               <div className="relative">
                 <img
                   src={apostleEdwinPhoto}
                   alt="Apostle Edwin E. Otejiri"
                   className="w-full max-w-md mx-auto lg:mx-0 rounded-2xl shadow-elegant"
                 />
-                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-primary to-secondary p-4 rounded-xl text-white">
+                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-primary to-secondary p-4 rounded-xl text-white animate-fade-in" style={{ animationDelay: '0.5s' }}>
                   <div className="text-2xl font-bold">15+</div>
                   <div className="text-sm">Years Ministry</div>
                 </div>
@@ -107,7 +113,7 @@ const About = () => {
             </div>
 
             {/* Content */}
-            <div className="scroll-fade-in">
+            <div className={`transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`} style={{ transitionDelay: '200ms' }}>
               <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
                 Apostle & Voice of Eternity Founder
               </Badge>
