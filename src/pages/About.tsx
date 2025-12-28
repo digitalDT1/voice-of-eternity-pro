@@ -88,12 +88,11 @@ const About = () => {
     <div className="min-h-screen">
       {/* Cinematic Hero Section */}
       <section className="relative h-[70vh] md:h-[80vh] flex items-center overflow-hidden">
-        {/* Background Image with Desaturation - Portrait crop from top to waist */}
+        {/* Background Image with Desaturation */}
         <div 
-          className="absolute inset-0 bg-cover bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url(${apostleEdwinPhoto})`,
-            backgroundPosition: 'top center',
             filter: 'grayscale(70%) brightness(0.5)',
           }}
         />
