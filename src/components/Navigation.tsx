@@ -40,9 +40,13 @@ export const Navigation = () => {
 
   return (
     <>
-      {/* Main Navigation */}
+      {/* Main Navigation - Hide when floating nav appears on homepage */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          showFloating && isHomePage
+            ? "opacity-0 -translate-y-full pointer-events-none"
+            : "opacity-100 translate-y-0"
+        } ${
           isTransparent
             ? "bg-transparent"
             : "bg-background/95 backdrop-blur-md shadow-lg"
