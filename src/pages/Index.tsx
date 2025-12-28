@@ -4,63 +4,45 @@ import { Play, Headphones, Heart, ArrowRight, ChevronLeft, ChevronRight } from "
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import heroBg from "@/assets/hero-bg.jpg";
-
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
   const [currentSlide, setCurrentSlide] = useState(2);
   const totalSlides = 3;
-
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
       rootMargin: "0px 0px -50px 0px"
     };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
         }
       });
     }, observerOptions);
-
     const elements = document.querySelectorAll(".scroll-fade-in");
-    elements.forEach((el) => observer.observe(el));
-
+    elements.forEach(el => observer.observe(el));
     return () => observer.disconnect();
   }, []);
-
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev % totalSlides) + 1);
+    setCurrentSlide(prev => prev % totalSlides + 1);
   };
-
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 1 ? totalSlides : prev - 1));
+    setCurrentSlide(prev => prev === 1 ? totalSlides : prev - 1);
   };
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       {/* Hero Section - Full Screen Cinematic */}
-      <section 
-        ref={heroRef}
-        className="relative h-screen flex items-center overflow-hidden"
-      >
+      <section ref={heroRef} className="relative h-screen flex items-center overflow-hidden">
         {/* Background Image with Desaturation */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${heroBg})`,
-            filter: 'grayscale(70%) brightness(0.6)',
-          }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+        backgroundImage: `url(${heroBg})`,
+        filter: 'grayscale(70%) brightness(0.6)'
+      }} />
         
         {/* Left to Right Gradient Overlay */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%)',
-          }}
-        />
+        <div className="absolute inset-0" style={{
+        background: 'linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%)'
+      }} />
 
         {/* Hero Content - Right Aligned */}
         <div className="container-custom relative z-10 h-full flex items-center">
@@ -75,7 +57,9 @@ const Index = () => {
               </div>
 
               {/* Large Name Heading */}
-              <h1 className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <h1 className="animate-fade-in" style={{
+              animationDelay: '0.2s'
+            }}>
                 <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-white leading-[0.9] tracking-tight">
                   EDWIN
                 </span>
@@ -85,7 +69,9 @@ const Index = () => {
               </h1>
 
               {/* Tagline */}
-              <p className="mt-8 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <p className="mt-8 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto animate-fade-in" style={{
+              animationDelay: '0.4s'
+            }}>
                 Proclaiming God's eternal Counsels, bringing many into the realities of Christ
               </p>
             </div>
@@ -93,40 +79,29 @@ const Index = () => {
         </div>
 
         {/* Bottom Left - Watch Live Button */}
-        <div className="absolute bottom-12 left-8 md:left-16 z-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-          <a 
-            href="https://www.youtube.com/@Apostleedwine.otejiri1757" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-4 group cursor-pointer"
-          >
+        <div className="absolute bottom-12 left-8 md:left-16 z-10 animate-fade-in" style={{
+        animationDelay: '0.6s'
+      }}>
+          <a href="https://www.youtube.com/@Apostleedwine.otejiri1757" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
             <div className="w-14 h-14 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:border-white transition-colors duration-300">
               <Play className="h-5 w-5 text-white ml-1" />
             </div>
-            <span className="text-xs tracking-[0.2em] uppercase text-white/70 group-hover:text-white transition-colors duration-300">
-              Watch Apostle Live
-            </span>
+            <span className="text-xs tracking-[0.2em] uppercase text-white/70 group-hover:text-white transition-colors duration-300">WATCH  PODCAST</span>
           </a>
         </div>
 
         {/* Bottom Right - Slide Indicator */}
-        <div className="absolute bottom-12 right-8 md:right-16 z-10 flex items-center gap-4 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+        <div className="absolute bottom-12 right-8 md:right-16 z-10 flex items-center gap-4 animate-fade-in" style={{
+        animationDelay: '0.6s'
+      }}>
           <span className="text-sm text-white/60 font-light tracking-wider">
             {String(currentSlide).padStart(2, '0')}/{String(totalSlides).padStart(2, '0')}
           </span>
           <div className="flex items-center gap-2">
-            <button 
-              onClick={prevSlide}
-              className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 transition-colors duration-300"
-              aria-label="Previous slide"
-            >
+            <button onClick={prevSlide} className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 transition-colors duration-300" aria-label="Previous slide">
               <ChevronLeft className="h-4 w-4 text-white/60" />
             </button>
-            <button 
-              onClick={nextSlide}
-              className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 transition-colors duration-300"
-              aria-label="Next slide"
-            >
+            <button onClick={nextSlide} className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 transition-colors duration-300" aria-label="Next slide">
               <ChevronRight className="h-4 w-4 text-white/60" />
             </button>
           </div>
@@ -244,8 +219,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
