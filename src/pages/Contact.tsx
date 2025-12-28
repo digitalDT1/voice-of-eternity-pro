@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -49,11 +50,10 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     setTimeout(() => {
       toast({
         title: "Message Sent Successfully!",
-        description: "Thank you for reaching out. Pastor David will respond within 24-48 hours.",
+        description: "Thank you for reaching out. Apostle Edwin will respond within 24-48 hours.",
       });
       
       setFormData({
@@ -104,7 +104,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Speaking Engagements",
-      description: "Invite Pastor David to speak at your event or conference."
+      description: "Invite Apostle Edwin to speak at your event or conference."
     },
     {
       icon: Send,
@@ -114,33 +114,87 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-20">
-      {/* Header */}
-      <section className="section-padding bg-gradient-subtle">
-        <div className="container-custom">
-          <div className="text-center scroll-fade-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gradient mb-6">
-              Get In Touch
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We'd love to hear from you. Whether you have questions, prayer requests, or just want to connect, don't hesitate to reach out.
-            </p>
+    <div className="min-h-screen">
+      {/* Cinematic Hero Section */}
+      <section className="relative h-[70vh] md:h-[80vh] flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${heroBg})`,
+            filter: 'grayscale(70%) brightness(0.4)',
+          }}
+        />
+        
+        {/* Gradient Overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.9) 100%)',
+          }}
+        />
+
+        {/* Hero Content - Right Aligned */}
+        <div className="container-custom relative z-10 h-full flex items-center">
+          <div className="w-full flex justify-end">
+            <div className="max-w-2xl text-right pr-4 md:pr-8 lg:pr-16">
+              {/* Label with Line */}
+              <div className="flex items-center justify-end gap-4 mb-6 animate-fade-in">
+                <div className="h-[1px] w-16 bg-white/50"></div>
+                <span className="text-xs tracking-[0.3em] uppercase text-white/80 font-light">
+                  Contact
+                </span>
+              </div>
+
+              {/* Large Heading */}
+              <h1 className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <span className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold text-white leading-[0.9] tracking-tight">
+                  GET IN
+                </span>
+                <span className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold text-white leading-[0.9] tracking-tight mt-2">
+                  TOUCH
+                </span>
+              </h1>
+
+              {/* Tagline */}
+              <p className="mt-6 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                We'd love to hear from you. Reach out with questions, prayer requests, or just to connect.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Left - Quick Contact */}
+        <div className="absolute bottom-8 left-8 md:left-16 z-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-col gap-3">
+            <a href="mailto:edwinteejay@gmail.com" className="flex items-center gap-3 text-white/70 hover:text-white transition-colors">
+              <Mail className="h-4 w-4" />
+              <span className="text-xs tracking-wide">edwinteejay@gmail.com</span>
+            </a>
+            <a href="tel:+2347060974266" className="flex items-center gap-3 text-white/70 hover:text-white transition-colors">
+              <Phone className="h-4 w-4" />
+              <span className="text-xs tracking-wide">+234 706 097 4266</span>
+            </a>
           </div>
         </div>
       </section>
 
       {/* Contact Form & Info */}
-      <section className="section-padding">
+      <section className="section-padding bg-background">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div className="scroll-fade-in">
-              <Card className="card-elegant p-8">
-                <h2 className="text-3xl font-serif font-bold text-gradient mb-6">Send Us a Message</h2>
+              <Card className="card-elegant p-8 border-t-4 border-t-primary">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="h-[1px] w-8 bg-primary/50"></div>
+                  <span className="text-xs tracking-[0.2em] uppercase text-primary/80 font-medium">Message</span>
+                </div>
+                <h2 className="text-3xl font-serif font-bold text-gradient mb-8">Send Us a Message</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Full Name *</Label>
+                      <Label htmlFor="name" className="text-sm font-medium">Full Name *</Label>
                       <Input
                         id="name"
                         name="name"
@@ -149,11 +203,11 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="Your full name"
-                        className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                        className="transition-all duration-200 focus:ring-2 focus:ring-primary/20 bg-accent/30 border-border/50"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
+                      <Label htmlFor="email" className="text-sm font-medium">Email Address *</Label>
                       <Input
                         id="email"
                         name="email"
@@ -162,13 +216,13 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="your.email@example.com"
-                        className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                        className="transition-all duration-200 focus:ring-2 focus:ring-primary/20 bg-accent/30 border-border/50"
                       />
                     </div>
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="subject">Subject *</Label>
+                    <Label htmlFor="subject" className="text-sm font-medium">Subject *</Label>
                     <Input
                       id="subject"
                       name="subject"
@@ -177,12 +231,12 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleInputChange}
                       placeholder="What is this regarding?"
-                      className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
+                      className="transition-all duration-200 focus:ring-2 focus:ring-primary/20 bg-accent/30 border-border/50"
                     />
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="message">Message *</Label>
+                    <Label htmlFor="message" className="text-sm font-medium">Message *</Label>
                     <Textarea
                       id="message"
                       name="message"
@@ -191,7 +245,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Share your thoughts, questions, or prayer requests..."
-                      className="transition-all duration-200 focus:ring-2 focus:ring-primary/20 resize-none"
+                      className="transition-all duration-200 focus:ring-2 focus:ring-primary/20 resize-none bg-accent/30 border-border/50"
                     />
                   </div>
                   
@@ -217,32 +271,36 @@ const Contact = () => {
             </div>
 
             {/* Contact Information */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="scroll-fade-in">
-                <h2 className="text-3xl font-serif font-bold text-gradient mb-6">Contact Information</h2>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="h-[1px] w-8 bg-primary/50"></div>
+                  <span className="text-xs tracking-[0.2em] uppercase text-primary/80 font-medium">Info</span>
+                </div>
+                <h2 className="text-3xl font-serif font-bold text-gradient mb-8">Contact Information</h2>
                 <div className="grid gap-4">
                   {contactInfo.map((info, index) => (
-                    <Card key={index} className="card-elegant p-6 card-hover">
+                    <Card key={index} className="card-elegant p-5 card-hover">
                       {info.link ? (
                         <a href={info.link} className="flex items-start space-x-4">
-                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                            <info.icon className="h-6 w-6 text-white" />
+                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center">
+                            <info.icon className="h-5 w-5 text-white" />
                           </div>
                           <div>
-                            <h3 className="text-lg font-semibold mb-1">{info.title}</h3>
-                            <p className="text-primary font-medium mb-1 hover:underline">{info.value}</p>
-                            <p className="text-muted-foreground text-sm">{info.description}</p>
+                            <h3 className="text-base font-semibold mb-0.5">{info.title}</h3>
+                            <p className="text-primary font-medium mb-0.5 hover:underline text-sm">{info.value}</p>
+                            <p className="text-muted-foreground text-xs">{info.description}</p>
                           </div>
                         </a>
                       ) : (
                         <div className="flex items-start space-x-4">
-                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
-                            <info.icon className="h-6 w-6 text-white" />
+                          <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center">
+                            <info.icon className="h-5 w-5 text-white" />
                           </div>
                           <div>
-                            <h3 className="text-lg font-semibold mb-1">{info.title}</h3>
-                            <p className="text-primary font-medium mb-1">{info.value}</p>
-                            <p className="text-muted-foreground text-sm">{info.description}</p>
+                            <h3 className="text-base font-semibold mb-0.5">{info.title}</h3>
+                            <p className="text-primary font-medium mb-0.5 text-sm">{info.value}</p>
+                            <p className="text-muted-foreground text-xs">{info.description}</p>
                           </div>
                         </div>
                       )}
@@ -253,10 +311,10 @@ const Contact = () => {
 
               {/* Reasons to Contact */}
               <div className="scroll-fade-in">
-                <h3 className="text-2xl font-serif font-bold mb-4">What Can We Help You With?</h3>
+                <h3 className="text-2xl font-serif font-bold mb-6">What Can We Help You With?</h3>
                 <div className="space-y-4">
                   {reasons.map((reason, index) => (
-                    <div key={index} className="flex items-start space-x-4 p-4 rounded-lg border border-border hover:bg-accent/50 transition-colors">
+                    <div key={index} className="flex items-start space-x-4 p-4 rounded-xl border border-border/50 bg-accent/20 hover:bg-accent/40 transition-colors">
                       <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                         <reason.icon className="h-5 w-5 text-primary" />
                       </div>
@@ -273,44 +331,44 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Ministry Hours & Response */}
-      <section className="py-16 bg-accent/30">
+      {/* Ministry Hours */}
+      <section className="py-20 bg-primary text-white">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="card-elegant p-8 scroll-fade-in">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="p-8 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 scroll-fade-in">
               <div className="flex items-center space-x-4 mb-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                  <Clock className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+                  <Clock className="h-6 w-6 text-secondary" />
                 </div>
                 <h3 className="text-2xl font-serif font-bold">Office Hours</h3>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-3 text-white/80">
                 <div className="flex justify-between">
                   <span>Tuesday - Friday</span>
-                  <span className="font-medium">9:00 AM - 3:00 PM</span>
+                  <span className="font-medium text-white">9:00 AM - 3:00 PM</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Monday</span>
-                  <span className="font-medium">Closed</span>
+                  <span className="font-medium text-white/60">Closed</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Weekends</span>
-                  <span className="font-medium">Closed</span>
+                  <span className="font-medium text-white/60">Closed</span>
                 </div>
               </div>
-            </Card>
+            </div>
 
-            <Card className="card-elegant p-8 scroll-fade-in">
+            <div className="p-8 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 scroll-fade-in">
               <div className="flex items-center space-x-4 mb-6">
-                <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
                   <MessageCircle className="h-6 w-6 text-secondary" />
                 </div>
                 <h3 className="text-2xl font-serif font-bold">Response Promise</h3>
               </div>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-white/80 leading-relaxed">
                 We value every message and strive to respond within 24-48 hours. For urgent prayer requests, please call our office during office hours (Tuesday - Friday, 9 AM - 3 PM). Your spiritual wellbeing matters to us.
               </p>
-            </Card>
+            </div>
           </div>
         </div>
       </section>
