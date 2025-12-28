@@ -164,22 +164,22 @@ export const Navigation = () => {
             : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
-        <div className="bg-background/90 backdrop-blur-xl shadow-2xl rounded-full px-2 py-2 border border-border/50">
+        <div className="bg-background/95 backdrop-blur-xl shadow-2xl rounded-full px-3 py-2 border border-border">
           <div className="flex items-center gap-1">
-            {/* Logo */}
+            {/* Logo - More visible */}
             <Link 
               to="/" 
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-primary hover:bg-primary/90 transition-colors"
             >
               <img 
                 src={voeLogo} 
                 alt="Voice of Eternity Logo" 
-                className="w-6 h-6"
+                className="w-8 h-8 brightness-0 invert"
               />
             </Link>
 
             {/* Divider */}
-            <div className="w-[1px] h-6 bg-border/50 mx-2"></div>
+            <div className="w-[1px] h-6 bg-border mx-2"></div>
 
             {/* Nav Items */}
             {navigationItems.map((item) => (
@@ -190,7 +190,7 @@ export const Navigation = () => {
                 className={`px-4 py-2 text-xs font-medium tracking-wide uppercase rounded-full transition-all duration-300 ${
                   location.pathname === item.href
                     ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    : "text-foreground hover:text-primary hover:bg-accent"
                 }`}
               >
                 {item.name}
@@ -198,11 +198,11 @@ export const Navigation = () => {
             ))}
 
             {/* Divider */}
-            <div className="w-[1px] h-6 bg-border/50 mx-2"></div>
+            <div className="w-[1px] h-6 bg-border mx-2"></div>
 
             {/* Cart */}
             <button 
-              className="flex items-center justify-center w-10 h-10 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
+              className="flex items-center justify-center w-10 h-10 rounded-full text-foreground hover:text-primary hover:bg-accent transition-all"
               aria-label="Shopping Cart"
             >
               <ShoppingCart className="h-4 w-4" />
