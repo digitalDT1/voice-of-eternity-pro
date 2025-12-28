@@ -1,13 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Play, Headphones, Heart, ArrowRight, Mail, Phone } from "lucide-react";
+import { Play, Headphones, Heart, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import heroBg from "@/assets/hero-bg.jpg";
-import voeLogo from "@/assets/voe-logo-transparent.png";
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(2);
+  const totalSlides = 3;
 
   useEffect(() => {
     const observerOptions = {
@@ -29,63 +30,105 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev % totalSlides) + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 1 ? totalSlides : prev - 1));
+  };
+
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section - Full Screen Cinematic */}
       <section 
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(rgba(34, 57, 107, 0.7), rgba(34, 57, 107, 0.5)), url(${heroBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}
+        className="relative h-screen flex items-center overflow-hidden"
       >
-        <div className="container-custom relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <div className="mb-8 animate-scale-in">
-              <img 
-                src={voeLogo} 
-                alt="Voice of Eternity Logo" 
-                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 mx-auto mb-6"
-              />
-            </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 animate-fade-in">
-              Voice of <span className="text-gradient bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent">Eternity</span>
-            </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl mb-8 text-white/90 animate-slide-up max-w-3xl mx-auto">
-              Proclaiming God's eternal Counsels, bringing many into the realities of Christ and raising an army of Consecrated men. 
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-scale-in">
-              <Button className="btn-hero group">
-                <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                Listen Now
-              </Button>
-              <Button variant="outline" className="glass text-white border-white/30 hover:bg-white/20 px-8 py-4">
-                <Headphones className="mr-2 h-5 w-5" />
-                Latest Episode
-              </Button>
-            </div>
+        {/* Background Image with Desaturation */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${heroBg})`,
+            filter: 'grayscale(70%) brightness(0.6)',
+          }}
+        />
+        
+        {/* Left to Right Gradient Overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%)',
+          }}
+        />
 
-            {/* Contact info on hero */}
-            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-white/90 text-sm">
-              <a href="mailto:edwinteejay@gmail.com" className="flex items-center gap-2 hover:text-secondary transition-colors">
-                <Mail className="h-4 w-4" />
-                <span>edwinteejay@gmail.com</span>
-              </a>
-              <a href="tel:+2347060974266" className="flex items-center gap-2 hover:text-secondary transition-colors">
-                <Phone className="h-4 w-4" />
-                <span>+234 706 097 4266</span>
-              </a>
+        {/* Hero Content - Right Aligned */}
+        <div className="container-custom relative z-10 h-full flex items-center">
+          <div className="w-full flex justify-end">
+            <div className="max-w-xl text-right pr-4 md:pr-8 lg:pr-16">
+              {/* Apostle Label with Line */}
+              <div className="flex items-center justify-end gap-4 mb-8 animate-fade-in">
+                <div className="h-[1px] w-16 bg-white/50"></div>
+                <span className="text-xs tracking-[0.3em] uppercase text-white/80 font-light">
+                  Apostle
+                </span>
+              </div>
+
+              {/* Large Name Heading */}
+              <h1 className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-white leading-[0.9] tracking-tight">
+                  EDWIN
+                </span>
+                <span className="block text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-serif font-bold text-white leading-[0.9] tracking-tight mt-2">
+                  OTEJIRI
+                </span>
+              </h1>
+
+              {/* Tagline */}
+              <p className="mt-8 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                Proclaiming God's eternal Counsels, bringing many into the realities of Christ
+              </p>
             </div>
           </div>
         </div>
-        
-        {/* Animated scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float">
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
+
+        {/* Bottom Left - Watch Live Button */}
+        <div className="absolute bottom-12 left-8 md:left-16 z-10 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <a 
+            href="https://www.youtube.com/@Apostleedwine.otejiri1757" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 group cursor-pointer"
+          >
+            <div className="w-14 h-14 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:border-white transition-colors duration-300">
+              <Play className="h-5 w-5 text-white ml-1" />
+            </div>
+            <span className="text-xs tracking-[0.2em] uppercase text-white/70 group-hover:text-white transition-colors duration-300">
+              Watch Apostle Live
+            </span>
+          </a>
+        </div>
+
+        {/* Bottom Right - Slide Indicator */}
+        <div className="absolute bottom-12 right-8 md:right-16 z-10 flex items-center gap-4 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <span className="text-sm text-white/60 font-light tracking-wider">
+            {String(currentSlide).padStart(2, '0')}/{String(totalSlides).padStart(2, '0')}
+          </span>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={prevSlide}
+              className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 transition-colors duration-300"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="h-4 w-4 text-white/60" />
+            </button>
+            <button 
+              onClick={nextSlide}
+              className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 transition-colors duration-300"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="h-4 w-4 text-white/60" />
+            </button>
           </div>
         </div>
       </section>
