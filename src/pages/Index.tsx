@@ -3,15 +3,22 @@ import { Link } from "react-router-dom";
 import { Play, Headphones, Heart, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { HeroCarousel } from "@/components/HeroCarousel";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import heroBg from "@/assets/hero-bg.jpg";
+import pastorPhoto from "@/assets/pastor-photo.jpg";
+import apostleEdwin from "@/assets/apostle-edwin.jpg";
+
+// Hero images for carousel
+const heroImages = [heroBg, pastorPhoto, apostleEdwin];
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
   const heroContentRef = useRef<HTMLDivElement>(null);
-  const [currentSlide, setCurrentSlide] = useState(2);
+  const [currentSlide, setCurrentSlide] = useState(1);
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const totalSlides = 3;
+  const totalSlides = heroImages.length;
 
   // Entrance animation trigger
   useEffect(() => {
@@ -67,15 +74,14 @@ const Index = () => {
         className="relative h-screen flex items-center overflow-hidden"
         style={{ position: 'sticky', top: 0, zIndex: 0 }}
       >
-        {/* Background Image with Parallax */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-100"
-          style={{
-            backgroundImage: `url(${heroBg})`,
-            filter: 'grayscale(70%) brightness(0.6)',
-            transform: `scale(${heroScale})`,
-            opacity: heroOpacity
-          }} 
+        {/* Background Image Carousel with Parallax */}
+        <HeroCarousel 
+          images={heroImages}
+          interval={6000}
+          currentSlide={currentSlide}
+          setCurrentSlide={setCurrentSlide}
+          heroScale={heroScale}
+          heroOpacity={heroOpacity}
         />
         
         {/* Left to Right Gradient Overlay */}
@@ -295,26 +301,14 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Quick Stats */}
+        {/* Quick Stats with Animated Counters */}
         <section className="py-16 bg-primary text-white">
           <div className="container-custom">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div className="scroll-fade-in">
-                <div className="text-4xl md:text-5xl font-bold font-serif mb-2">150+</div>
-                <div className="text-white/80">Episodes</div>
-              </div>
-              <div className="scroll-fade-in">
-                <div className="text-4xl md:text-5xl font-bold font-serif mb-2">50K+</div>
-                <div className="text-white/80">Monthly Listeners</div>
-              </div>
-              <div className="scroll-fade-in">
-                <div className="text-4xl md:text-5xl font-bold font-serif mb-2">25+</div>
-                <div className="text-white/80">Countries</div>
-              </div>
-              <div className="scroll-fade-in">
-                <div className="text-4xl md:text-5xl font-bold font-serif mb-2">5</div>
-                <div className="text-white/80">Years</div>
-              </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <AnimatedCounter end={150} suffix="+" label="Episodes" duration={2000} />
+              <AnimatedCounter end={50} suffix="K+" label="Monthly Listeners" duration={2500} />
+              <AnimatedCounter end={25} suffix="+" label="Countries" duration={1800} />
+              <AnimatedCounter end={5} suffix="" label="Years" duration={1500} />
             </div>
           </div>
         </section>
