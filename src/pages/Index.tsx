@@ -13,28 +13,22 @@ import heroSlide3 from "@/assets/hero-slide-3.jpg";
 // Hero slides with images and text
 const heroSlides = [
   {
-    image: heroBg,
+    image: heroSlide1,
     line1: "EDWIN",
     line2: "OTEJIRI",
     tagline: "Proclaiming God's eternal Counsels, bringing many into the realities of Christ"
   },
   {
-    image: heroSlide1,
+    image: heroSlide2,
     line1: "VOICE OF",
     line2: "ETERNITY",
     tagline: "Transforming lives through the power of God's unchanging Word"
   },
   {
-    image: heroSlide2,
+    image: heroSlide3,
     line1: "DIVINE",
     line2: "PURPOSE",
     tagline: "Awakening destinies and igniting passion for the Kingdom"
-  },
-  {
-    image: heroSlide3,
-    line1: "WALK WITH",
-    line2: "GOD",
-    tagline: "Discovering the depths of fellowship with the Creator"
   }
 ];
 
