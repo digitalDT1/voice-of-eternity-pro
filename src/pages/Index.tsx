@@ -6,23 +6,35 @@ import { Card } from "@/components/ui/card";
 import { HeroTextSlider } from "@/components/HeroTextSlider";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import heroBg from "@/assets/hero-bg.jpg";
+import heroSlide1 from "@/assets/hero-slide-1.jpg";
+import heroSlide2 from "@/assets/hero-slide-2.jpg";
+import heroSlide3 from "@/assets/hero-slide-3.jpg";
 
-// Text slides for the hero
-const heroTexts = [
+// Hero slides with images and text
+const heroSlides = [
   {
+    image: heroBg,
     line1: "EDWIN",
     line2: "OTEJIRI",
     tagline: "Proclaiming God's eternal Counsels, bringing many into the realities of Christ"
   },
   {
+    image: heroSlide1,
     line1: "VOICE OF",
     line2: "ETERNITY",
     tagline: "Transforming lives through the power of God's unchanging Word"
   },
   {
+    image: heroSlide2,
     line1: "DIVINE",
     line2: "PURPOSE",
     tagline: "Awakening destinies and igniting passion for the Kingdom"
+  },
+  {
+    image: heroSlide3,
+    line1: "WALK WITH",
+    line2: "GOD",
+    tagline: "Discovering the depths of fellowship with the Creator"
   }
 ];
 
@@ -32,7 +44,14 @@ const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const totalSlides = heroTexts.length;
+  const totalSlides = heroSlides.length;
+  
+  // Extract text data for HeroTextSlider
+  const heroTexts = heroSlides.map(slide => ({
+    line1: slide.line1,
+    line2: slide.line2,
+    tagline: slide.tagline
+  }));
 
   // Entrance animation trigger
   useEffect(() => {
@@ -88,16 +107,22 @@ const Index = () => {
         className="relative h-screen flex items-center overflow-hidden"
         style={{ position: 'sticky', top: 0, zIndex: 0 }}
       >
-        {/* Single Background Image with Parallax */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-100"
-          style={{
-            backgroundImage: `url(${heroBg})`,
-            filter: 'grayscale(70%) brightness(0.6)',
-            transform: `scale(${heroScale})`,
-            opacity: heroOpacity
-          }} 
-        />
+        {/* Image Slider with Blur Fade Effect */}
+        {heroSlides.map((slide, index) => (
+          <div 
+            key={index}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
+            style={{
+              backgroundImage: `url(${slide.image})`,
+              filter: currentSlide === index + 1 
+                ? 'grayscale(70%) brightness(0.6)' 
+                : 'grayscale(70%) brightness(0.6) blur(8px)',
+              transform: `scale(${heroScale})`,
+              opacity: currentSlide === index + 1 ? heroOpacity : 0,
+              zIndex: currentSlide === index + 1 ? 0 : -1,
+            }} 
+          />
+        ))}
         
         {/* Left to Right Gradient Overlay */}
         <div 
