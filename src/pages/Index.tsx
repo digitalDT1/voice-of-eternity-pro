@@ -129,8 +129,9 @@ const Index = () => {
         </div>
 
         {/* Bottom Left - Watch Live Button and Arrows */}
+        {/* Bottom Left - Watch Live Button and Arrows on same line */}
         <div 
-          className={`absolute bottom-12 left-8 md:left-16 z-10 transition-all duration-1000 ease-out ${
+          className={`absolute bottom-12 left-8 md:left-16 right-8 md:right-16 z-10 transition-all duration-1000 ease-out ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
           style={{ 
@@ -138,7 +139,8 @@ const Index = () => {
             opacity: contentOpacity
           }}
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex items-center justify-between">
+            {/* Watch Podcast - Left */}
             <a 
               href="https://www.youtube.com/@Apostleedwine.otejiri1757" 
               target="_blank" 
@@ -153,8 +155,8 @@ const Index = () => {
               </span>
             </a>
             
-            {/* Slide Controls - Below Watch Podcast, aligned right */}
-            <div className="flex items-center gap-3 justify-end">
+            {/* Slide Controls - Right aligned on same line */}
+            <div className="flex items-center gap-3">
               <span className="text-sm text-white/60 font-light tracking-wider">
                 {String(currentSlide).padStart(2, '0')}/{String(totalSlides).padStart(2, '0')}
               </span>
