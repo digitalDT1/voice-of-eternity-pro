@@ -1,17 +1,29 @@
-import { useEffect, useState } from "react";
-import { Heart, Gift, Users, Star, Check, ArrowRight, Mail, Phone } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Heart, Gift, Users, Star, Check, ArrowRight, Mail, Phone, CreditCard } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
+import { SiStripe, SiVisa, SiMastercard, SiPaypal, SiApplepay, SiGooglepay } from "react-icons/si";
 
 const Support = () => {
+  const heroRef = useRef<HTMLElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAnnual, setIsAnnual] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Scroll effect for hero
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -33,6 +45,20 @@ const Support = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // Calculate parallax and fade values based on scroll
+  const heroOpacity = Math.max(0, 1 - scrollY / 500);
+  const contentTranslateY = scrollY * 0.3;
+
+  // Payment method icons data
+  const paymentIcons = [
+    { Icon: SiStripe, color: "bg-[#635BFF]", label: "Stripe" },
+    { Icon: SiVisa, color: "bg-[#1A1F71]", label: "Visa" },
+    { Icon: SiMastercard, color: "bg-[#EB001B]", label: "Mastercard" },
+    { Icon: SiPaypal, color: "bg-[#003087]", label: "PayPal" },
+    { Icon: SiApplepay, color: "bg-foreground", label: "Apple Pay" },
+    { Icon: SiGooglepay, color: "bg-[#4285F4]", label: "Google Pay" },
+  ];
 
   const pricingTiers = [
     {
@@ -86,33 +112,99 @@ const Support = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-20">
-      {/* Hero Section */}
-      <section className="section-padding bg-gradient-subtle overflow-hidden">
-        <div className="container-custom">
-          <div className={`text-center transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Ministry Support</Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gradient mb-6">
-              Partner With Us
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              Your support enables us to continue spreading hope, faith, and biblical truth to hearts around the world. Together, we can make an eternal impact.
-            </p>
-            
-            {/* Contact info highlighted */}
-            <div className={`flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground mb-8 transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
-              <a href="mailto:edwinteejay@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
-                <Mail className="h-5 w-5" />
-                <span className="font-medium">edwinteejay@gmail.com</span>
-              </a>
-              <a href="tel:+2347060974266" className="flex items-center gap-2 hover:text-primary transition-colors">
-                <Phone className="h-5 w-5" />
-                <span className="font-medium">+234 706 097 4266</span>
-              </a>
+    <div className="min-h-screen">
+      {/* Hero Section with Scroll Animation */}
+      <section 
+        ref={heroRef}
+        className="relative min-h-[80vh] flex items-center overflow-hidden pt-20"
+        style={{ position: 'sticky', top: 0, zIndex: 0 }}
+      >
+        <div 
+          className="container-custom relative z-10"
+          style={{
+            transform: `translateY(${contentTranslateY}px)`,
+            opacity: heroOpacity
+          }}
+        >
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className={`transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Ministry Support</Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gradient mb-6">
+                Partner<br />With Us
+              </h1>
+              <p className="text-lg text-muted-foreground max-w-lg mb-8">
+                Your support enables us to continue spreading hope, faith, and biblical truth to hearts around the world. Together, we can make an eternal impact.
+              </p>
+              
+              <Button className="btn-secondary group" size="lg">
+                Start Giving
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+
+              {/* Contact info */}
+              <div className={`flex flex-col sm:flex-row items-start gap-4 text-muted-foreground mt-8 transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '200ms' }}>
+                <a href="mailto:edwinteejay@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors text-sm">
+                  <Mail className="h-4 w-4" />
+                  <span>edwinteejay@gmail.com</span>
+                </a>
+                <a href="tel:+2347060974266" className="flex items-center gap-2 hover:text-primary transition-colors text-sm">
+                  <Phone className="h-4 w-4" />
+                  <span>+234 706 097 4266</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right - Payment Icons Floating Design */}
+            <div className={`relative h-[400px] lg:h-[500px] transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
+              {/* Stripe - Large Green */}
+              <div className="absolute top-0 left-[10%] w-24 h-28 md:w-32 md:h-36 bg-[#635BFF] rounded-3xl rounded-bl-[3rem] flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '0s' }}>
+                <SiStripe className="w-12 h-12 md:w-16 md:h-16 text-white" />
+              </div>
+
+              {/* TRC / Visa - Blue pill */}
+              <div className="absolute top-4 right-[5%] px-4 py-2 bg-[#1A1F71] rounded-full flex items-center gap-2 shadow-lg animate-float" style={{ animationDelay: '0.5s' }}>
+                <SiVisa className="w-10 h-6 md:w-12 md:h-8 text-white" />
+              </div>
+
+              {/* Naira / Mastercard - Circle */}
+              <div className="absolute top-[30%] right-[15%] w-20 h-20 md:w-24 md:h-24 bg-[#EB001B] rounded-full flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '1s' }}>
+                <SiMastercard className="w-10 h-10 md:w-12 md:h-12 text-white" />
+              </div>
+
+              {/* PayPal - Rectangle */}
+              <div className="absolute top-[50%] left-[5%] w-20 h-16 md:w-24 md:h-20 bg-[#003087] rounded-2xl flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '1.5s' }}>
+                <SiPaypal className="w-8 h-8 md:w-10 md:h-10 text-white" />
+              </div>
+
+              {/* Apple Pay - Dark rounded */}
+              <div className="absolute bottom-[25%] left-[25%] w-16 h-16 md:w-20 md:h-20 bg-foreground rounded-2xl flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '2s' }}>
+                <SiApplepay className="w-10 h-10 md:w-12 md:h-12 text-background" />
+              </div>
+
+              {/* Google Pay - Blue circle */}
+              <div className="absolute bottom-[10%] right-[25%] w-16 h-16 md:w-20 md:h-20 bg-[#4285F4] rounded-full flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '2.5s' }}>
+                <SiGooglepay className="w-8 h-8 md:w-10 md:h-10 text-white" />
+              </div>
+
+              {/* Additional decorative elements */}
+              <div className="absolute top-[15%] left-[45%] w-12 h-12 md:w-16 md:h-16 bg-secondary/20 rounded-full flex items-center justify-center animate-float" style={{ animationDelay: '0.8s' }}>
+                <CreditCard className="w-6 h-6 md:w-8 md:h-8 text-secondary" />
+              </div>
+
+              <div className="absolute bottom-[35%] right-[5%] w-14 h-14 md:w-18 md:h-18 bg-primary/20 rounded-2xl flex items-center justify-center animate-float" style={{ animationDelay: '1.8s' }}>
+                <Heart className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Spacer for scroll effect */}
+      <div className="h-[30vh] bg-transparent pointer-events-none" style={{ marginTop: '-30vh' }}></div>
+
+      {/* Content sections with relative positioning */}
+      <div className="relative z-10 bg-background">
 
       {/* Impact Stats */}
       <section className="py-16 bg-primary text-white">
@@ -368,6 +460,7 @@ const Support = () => {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 };
