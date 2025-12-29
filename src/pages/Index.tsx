@@ -128,7 +128,7 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Bottom Left - Watch Live Button */}
+        {/* Bottom Left - Watch Live Button and Arrows */}
         <div 
           className={`absolute bottom-12 left-8 md:left-16 z-10 transition-all duration-1000 ease-out ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -138,55 +138,49 @@ const Index = () => {
             opacity: contentOpacity
           }}
         >
-          <a 
-            href="https://www.youtube.com/@Apostleedwine.otejiri1757" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="flex items-center gap-4 group cursor-pointer"
-          >
-            <div className="w-14 h-14 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:border-white group-hover:scale-110 transition-all duration-300">
-              <Play className="h-5 w-5 text-white ml-1" />
+          <div className="flex flex-col gap-4">
+            <a 
+              href="https://www.youtube.com/@Apostleedwine.otejiri1757" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-4 group cursor-pointer"
+            >
+              <div className="w-14 h-14 rounded-full border-2 border-white/50 flex items-center justify-center group-hover:border-white group-hover:scale-110 transition-all duration-300">
+                <Play className="h-5 w-5 text-white ml-1" />
+              </div>
+              <span className="text-xs tracking-[0.2em] uppercase text-white/70 group-hover:text-white transition-colors duration-300">
+                WATCH PODCAST
+              </span>
+            </a>
+            
+            {/* Slide Controls - Below Watch Podcast, aligned right */}
+            <div className="flex items-center gap-3 justify-end">
+              <span className="text-sm text-white/60 font-light tracking-wider">
+                {String(currentSlide).padStart(2, '0')}/{String(totalSlides).padStart(2, '0')}
+              </span>
+              <div className="flex items-center gap-2">
+                <button 
+                  onClick={prevSlide} 
+                  className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 hover:scale-110 transition-all duration-300" 
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft className="h-4 w-4 text-white/60" />
+                </button>
+                <button 
+                  onClick={nextSlide} 
+                  className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 hover:scale-110 transition-all duration-300" 
+                  aria-label="Next slide"
+                >
+                  <ChevronRight className="h-4 w-4 text-white/60" />
+                </button>
+              </div>
             </div>
-            <span className="text-xs tracking-[0.2em] uppercase text-white/70 group-hover:text-white transition-colors duration-300">
-              WATCH PODCAST
-            </span>
-          </a>
-        </div>
-
-        {/* Bottom Right - Slide Indicator */}
-        <div 
-          className={`absolute bottom-12 right-8 md:right-16 z-10 flex items-center gap-4 transition-all duration-1000 ease-out ${
-            isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ 
-            transitionDelay: '1000ms',
-            opacity: contentOpacity
-          }}
-        >
-          <span className="text-sm text-white/60 font-light tracking-wider">
-            {String(currentSlide).padStart(2, '0')}/{String(totalSlides).padStart(2, '0')}
-          </span>
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={prevSlide} 
-              className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 hover:scale-110 transition-all duration-300" 
-              aria-label="Previous slide"
-            >
-              <ChevronLeft className="h-4 w-4 text-white/60" />
-            </button>
-            <button 
-              onClick={nextSlide} 
-              className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:border-white/60 hover:scale-110 transition-all duration-300" 
-              aria-label="Next slide"
-            >
-              <ChevronRight className="h-4 w-4 text-white/60" />
-            </button>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator - Hidden on mobile */}
         <div 
-          className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-10 transition-all duration-1000 ${
+          className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-10 transition-all duration-1000 hidden md:block ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ 

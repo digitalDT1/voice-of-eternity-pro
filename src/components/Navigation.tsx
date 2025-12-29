@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ShoppingCart, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 import voeLogo from "@/assets/voe-logo-transparent.png";
 import { Button } from "@/components/ui/button";
@@ -103,7 +103,7 @@ export const Navigation = () => {
               </div>
             </div>
 
-            {/* Right Side - Theme Toggle, Cart & Partnership */}
+            {/* Right Side - Theme Toggle & Partnership */}
             <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
               {/* Theme Toggle */}
               {mounted && (
@@ -120,20 +120,12 @@ export const Navigation = () => {
                 </button>
               )}
               
-              <button 
-                className={`transition-colors duration-300 ${
-                  isTransparent ? "text-white hover:text-white/70" : "text-foreground hover:text-primary"
-                }`}
-                aria-label="Shopping Cart"
-              >
-                <ShoppingCart className="h-5 w-5" />
-              </button>
               <Link to="/support">
                 <Button 
                   className={`text-xs font-medium tracking-[0.15em] uppercase px-6 py-2 rounded-none transition-all duration-300 ${
                     isTransparent 
                       ? "bg-white text-foreground hover:bg-white/90" 
-                      : "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "bg-primary dark:text-white hover:bg-primary/90"
                   }`}
                 >
                   Partnership
@@ -201,7 +193,7 @@ export const Navigation = () => {
         </div>
       </nav>
 
-      {/* Floating Navigation - Desktop only, hidden when mobile menu is open */}
+      {/* Floating Navigation - Desktop */}
       <nav
         className={`fixed top-4 left-1/2 -translate-x-1/2 z-[60] transition-all duration-500 hidden lg:block ${
           showFloating && !isOpen
@@ -256,22 +248,61 @@ export const Navigation = () => {
               </button>
             )}
 
-            {/* Cart */}
-            <button 
-              className="flex items-center justify-center w-10 h-10 rounded-full text-foreground hover:text-primary hover:bg-accent transition-all"
-              aria-label="Shopping Cart"
-            >
-              <ShoppingCart className="h-4 w-4" />
-            </button>
-
             {/* Partnership Button */}
             <Link to="/support">
               <Button 
-                className="text-xs font-medium tracking-wide uppercase px-5 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
+                className="text-xs font-medium tracking-wide uppercase px-5 py-2 rounded-full bg-primary dark:text-white hover:bg-primary/90"
               >
                 Partnership
               </Button>
             </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* Floating Navigation - Mobile */}
+      <nav
+        className={`fixed top-4 left-4 right-4 z-[60] transition-all duration-500 lg:hidden ${
+          showFloating && !isOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-4 pointer-events-none"
+        }`}
+      >
+        <div className="bg-background/95 backdrop-blur-xl shadow-2xl rounded-full px-4 py-2 border border-border">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link 
+              to="/" 
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-primary hover:bg-primary/90 transition-colors"
+            >
+              <img 
+                src={voeLogo} 
+                alt="Voice of Eternity Logo" 
+                className="w-6 h-6 brightness-0 invert"
+              />
+            </Link>
+
+            <div className="flex items-center gap-2">
+              {/* Theme Toggle */}
+              {mounted && (
+                <button 
+                  onClick={toggleTheme}
+                  className="flex items-center justify-center w-10 h-10 rounded-full text-foreground hover:text-primary hover:bg-accent transition-all"
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                </button>
+              )}
+
+              {/* Hamburger Menu */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center justify-center w-10 h-10 rounded-full text-foreground hover:bg-accent transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
