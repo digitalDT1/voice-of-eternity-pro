@@ -156,44 +156,75 @@ const Support = () => {
             </div>
 
             {/* Right - Payment Icons Floating Design */}
-            <div className={`relative h-[400px] lg:h-[500px] transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
-              {/* Stripe - Large Green */}
-              <div className="absolute top-0 left-[10%] w-24 h-28 md:w-32 md:h-36 bg-[#635BFF] rounded-3xl rounded-bl-[3rem] flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '0s' }}>
-                <SiStripe className="w-12 h-12 md:w-16 md:h-16 text-white" />
-              </div>
+            <div className={`relative h-[280px] md:h-[320px] lg:h-[360px] transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
+              {/* Stripe - Large rounded */}
+              <button 
+                onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="absolute top-[5%] left-[8%] w-16 h-20 md:w-20 md:h-24 bg-[#635BFF] rounded-2xl rounded-bl-[2rem] flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
+                style={{ animationDelay: '0s' }}
+                aria-label="Pay with Stripe"
+              >
+                <SiStripe className="w-8 h-8 md:w-10 md:h-10 text-white" />
+              </button>
 
-              {/* TRC / Visa - Blue pill */}
-              <div className="absolute top-4 right-[5%] px-4 py-2 bg-[#1A1F71] rounded-full flex items-center gap-2 shadow-lg animate-float" style={{ animationDelay: '0.5s' }}>
-                <SiVisa className="w-10 h-6 md:w-12 md:h-8 text-white" />
-              </div>
+              {/* Visa - pill */}
+              <button 
+                onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="absolute top-[8%] right-[12%] px-3 py-2 bg-[#1A1F71] rounded-full flex items-center shadow-md animate-float hover:scale-110 transition-transform cursor-pointer" 
+                style={{ animationDelay: '0.5s' }}
+                aria-label="Pay with Visa"
+              >
+                <SiVisa className="w-8 h-5 md:w-10 md:h-6 text-white" />
+              </button>
 
-              {/* Naira / Mastercard - Circle */}
-              <div className="absolute top-[30%] right-[15%] w-20 h-20 md:w-24 md:h-24 bg-[#EB001B] rounded-full flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '1s' }}>
-                <SiMastercard className="w-10 h-10 md:w-12 md:h-12 text-white" />
-              </div>
+              {/* Mastercard - Circle */}
+              <button 
+                onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="absolute top-[35%] right-[18%] w-14 h-14 md:w-16 md:h-16 bg-[#EB001B] rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
+                style={{ animationDelay: '1s' }}
+                aria-label="Pay with Mastercard"
+              >
+                <SiMastercard className="w-7 h-7 md:w-8 md:h-8 text-white" />
+              </button>
 
               {/* PayPal - Rectangle */}
-              <div className="absolute top-[50%] left-[5%] w-20 h-16 md:w-24 md:h-20 bg-[#003087] rounded-2xl flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '1.5s' }}>
-                <SiPaypal className="w-8 h-8 md:w-10 md:h-10 text-white" />
-              </div>
+              <button 
+                onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="absolute top-[45%] left-[5%] w-14 h-12 md:w-16 md:h-14 bg-[#003087] rounded-xl flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
+                style={{ animationDelay: '1.5s' }}
+                aria-label="Pay with PayPal"
+              >
+                <SiPaypal className="w-6 h-6 md:w-7 md:h-7 text-white" />
+              </button>
 
               {/* Apple Pay - Dark rounded */}
-              <div className="absolute bottom-[25%] left-[25%] w-16 h-16 md:w-20 md:h-20 bg-foreground rounded-2xl flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '2s' }}>
-                <SiApplepay className="w-10 h-10 md:w-12 md:h-12 text-background" />
-              </div>
+              <button 
+                onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="absolute bottom-[20%] left-[28%] w-12 h-12 md:w-14 md:h-14 bg-foreground rounded-xl flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
+                style={{ animationDelay: '2s' }}
+                aria-label="Pay with Apple Pay"
+              >
+                <SiApplepay className="w-7 h-7 md:w-8 md:h-8 text-background" />
+              </button>
 
               {/* Google Pay - Blue circle */}
-              <div className="absolute bottom-[10%] right-[25%] w-16 h-16 md:w-20 md:h-20 bg-[#4285F4] rounded-full flex items-center justify-center shadow-xl animate-float" style={{ animationDelay: '2.5s' }}>
-                <SiGooglepay className="w-8 h-8 md:w-10 md:h-10 text-white" />
+              <button 
+                onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="absolute bottom-[8%] right-[28%] w-12 h-12 md:w-14 md:h-14 bg-[#4285F4] rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
+                style={{ animationDelay: '2.5s' }}
+                aria-label="Pay with Google Pay"
+              >
+                <SiGooglepay className="w-6 h-6 md:w-7 md:h-7 text-white" />
+              </button>
+
+              {/* Decorative credit card */}
+              <div className="absolute top-[20%] left-[42%] w-10 h-10 md:w-12 md:h-12 bg-secondary/20 rounded-full flex items-center justify-center animate-float" style={{ animationDelay: '0.8s' }}>
+                <CreditCard className="w-5 h-5 md:w-6 md:h-6 text-secondary" />
               </div>
 
-              {/* Additional decorative elements */}
-              <div className="absolute top-[15%] left-[45%] w-12 h-12 md:w-16 md:h-16 bg-secondary/20 rounded-full flex items-center justify-center animate-float" style={{ animationDelay: '0.8s' }}>
-                <CreditCard className="w-6 h-6 md:w-8 md:h-8 text-secondary" />
-              </div>
-
-              <div className="absolute bottom-[35%] right-[5%] w-14 h-14 md:w-18 md:h-18 bg-primary/20 rounded-2xl flex items-center justify-center animate-float" style={{ animationDelay: '1.8s' }}>
-                <Heart className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+              {/* Decorative heart */}
+              <div className="absolute bottom-[30%] right-[8%] w-10 h-10 md:w-12 md:h-12 bg-primary/20 rounded-xl flex items-center justify-center animate-float" style={{ animationDelay: '1.8s' }}>
+                <Heart className="w-5 h-5 md:w-6 md:h-6 text-primary" />
               </div>
             </div>
           </div>
@@ -229,7 +260,7 @@ const Support = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className="section-padding">
+      <section id="pricing-section" className="section-padding">
         <div className="container-custom">
           <div className="scroll-fade-in text-center mb-12">
             <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Our Pricing</Badge>
