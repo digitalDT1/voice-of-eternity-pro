@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { Heart, Gift, Users, Star, Coffee, Crown, Mail, Phone } from "lucide-react";
+import { Heart, Gift, Users, Star, Check, ArrowRight, Mail, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
 
 const Support = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isAnnual, setIsAnnual] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
@@ -32,69 +34,47 @@ const Support = () => {
     return () => observer.disconnect();
   }, []);
 
-  const manualSupportTiers = [
-    {
-      name: "Coffee Supporter",
-      amount: "$5",
-      frequency: "One-time",
-      icon: Coffee,
-      description: "Buy Apostle Edwin a coffee and show your appreciation for the ministry.",
-      benefits: ["Thank you message", "Prayer request inclusion"],
-      popular: false,
-      color: "from-amber-500 to-orange-500"
-    },
-    {
-      name: "Blessing Seed",
-      amount: "$25",
-      frequency: "One-time",
-      icon: Gift,
-      description: "Sow a one-time blessing into the ministry and help us expand our reach.",
-      benefits: ["Thank you message", "Prayer coverage", "Ministry updates"],
-      popular: false,
-      color: "from-primary to-primary-light"
-    },
-    {
-      name: "Kingdom Investment",
-      amount: "$100",
-      frequency: "One-time",
-      icon: Crown,
-      description: "Make a significant investment in spreading God's eternal counsels.",
-      benefits: ["Personal thank you", "Exclusive prayer coverage", "Quarterly ministry updates"],
-      popular: false,
-      color: "from-secondary to-secondary-light"
-    }
-  ];
-
-  const monthlySupportTiers = [
+  const pricingTiers = [
     {
       name: "Faith Partner",
-      amount: "$10",
-      frequency: "Monthly", 
-      icon: Heart,
-      description: "Become a monthly faith partner and help sustain the Voice of Eternity ministry.",
-      benefits: ["Monthly newsletter", "Prayer request inclusion", "Early content access"],
+      monthlyPrice: 10,
+      annualPrice: 8,
+      description: "All the basics for individuals who are just getting started with supporting the ministry.",
+      features: [
+        "Monthly newsletter",
+        "Prayer request inclusion",
+        "Early content access"
+      ],
       popular: false,
-      color: "from-primary to-primary-light"
+      highlighted: false
     },
     {
       name: "Kingdom Builder",
-      amount: "$25",
-      frequency: "Monthly",
-      icon: Star,
-      description: "Join as a Kingdom Builder and play a vital role in raising consecrated men for God.",
-      benefits: ["All previous benefits", "Exclusive monthly updates", "Priority prayer requests"],
+      monthlyPrice: 25,
+      annualPrice: 21,
+      description: "Better for dedicated supporters who want to make a bigger impact.",
+      features: [
+        "All Faith Partner benefits",
+        "Exclusive monthly updates",
+        "Priority prayer requests",
+        "Community access"
+      ],
       popular: true,
-      color: "from-secondary to-secondary-light"
+      highlighted: true
     },
     {
       name: "Champion Partner",
-      amount: "$50",
-      frequency: "Monthly",
-      icon: Crown,
-      description: "Champion the advancement of God's eternal counsels through monthly partnership.",
-      benefits: ["All previous benefits", "Quarterly video call", "Special ministry access"],
+      monthlyPrice: 50,
+      annualPrice: 42,
+      description: "Advanced partnership for those who want maximum ministry engagement.",
+      features: [
+        "All previous benefits",
+        "Quarterly video calls",
+        "Special ministry access",
+        "Direct ministry updates"
+      ],
       popular: false,
-      color: "from-primary to-secondary"
+      highlighted: false
     }
   ];
 
@@ -156,102 +136,98 @@ const Support = () => {
         </div>
       </section>
 
-      {/* Manual Support Options */}
+      {/* Pricing Section */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="scroll-fade-in text-center mb-16">
-            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">One-Time Donations</Badge>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gradient mb-6">
-              Manual Support
+          <div className="scroll-fade-in text-center mb-12">
+            <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Our Pricing</Badge>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+              Choose the plan that's right<br className="hidden md:block" /> for your partnership
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Make a one-time donation to support the Voice of Eternity ministry and help spread God's eternal counsels.
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
+              Start with the <span className="font-semibold">Free plan</span> to try out our platform for an unlimited period of time.{" "}
+              <a href="#" className="text-primary font-semibold hover:underline inline-flex items-center gap-1">
+                Get started <ArrowRight className="h-4 w-4" />
+              </a>
             </p>
+
+            {/* Billing Toggle */}
+            <div className="flex items-center justify-center gap-4 mb-12">
+              <span className={`text-sm font-medium ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+                Bill Monthly
+              </span>
+              <Switch
+                checked={isAnnual}
+                onCheckedChange={setIsAnnual}
+                className="data-[state=checked]:bg-secondary"
+              />
+              <div className="flex items-center gap-2">
+                <span className={`text-sm font-medium ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  Bill Annually
+                </span>
+                <span className="text-xs font-semibold text-secondary">Save 15%</span>
+              </div>
+            </div>
           </div>
 
+          {/* Pricing Cards */}
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {manualSupportTiers.map((tier, index) => (
-              <Card key={index} className="card-elegant p-8 scroll-fade-in card-hover">
-                <div className={`w-16 h-16 bg-gradient-to-r ${tier.color} rounded-full flex items-center justify-center mb-6`}>
-                  <tier.icon className="h-8 w-8 text-white" />
-                </div>
+            {pricingTiers.map((tier, index) => (
+              <Card 
+                key={index} 
+                className={`scroll-fade-in relative overflow-hidden bg-card border rounded-xl ${
+                  tier.highlighted ? 'border-secondary' : 'border-border'
+                }`}
+              >
+                {/* Top Border Line */}
+                <div className={`h-1 w-full ${
+                  index === 0 ? 'bg-primary' : 
+                  index === 1 ? 'bg-secondary' : 
+                  'bg-primary'
+                }`} />
                 
-                <h3 className="text-2xl font-serif font-bold mb-2">{tier.name}</h3>
-                <div className="flex items-baseline mb-2">
-                  <span className="text-4xl font-bold text-primary">{tier.amount}</span>
-                  <span className="text-muted-foreground ml-2 text-sm">{tier.frequency}</span>
-                </div>
-                
-                <p className="text-muted-foreground mb-6">{tier.description}</p>
-                
-                <ul className="space-y-3 mb-8">
-                  {tier.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex} className="flex items-center space-x-2">
-                      <Heart className="h-4 w-4 text-primary flex-shrink-0" />
-                      <span className="text-sm">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <Button className="w-full btn-secondary" size="lg">
-                  Donate {tier.amount}
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Monthly Subscription Options */}
-      <section className="section-padding bg-accent/30">
-        <div className="container-custom">
-          <div className="scroll-fade-in text-center mb-16">
-            <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Monthly Partnership</Badge>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gradient mb-6">
-              Monthly Subscription
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Become a monthly partner and help sustain the Voice of Eternity ministry with automatic monthly contributions.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {monthlySupportTiers.map((tier, index) => (
-              <Card key={index} className={`card-elegant p-8 scroll-fade-in relative overflow-hidden ${tier.popular ? 'ring-2 ring-secondary shadow-glow' : ''}`}>
-                {tier.popular && (
-                  <div className="absolute top-0 right-0 bg-secondary text-primary px-4 py-1 text-sm font-bold">
-                    Most Popular
+                <div className="p-8">
+                  {/* Price */}
+                  <div className="mb-4">
+                    <span className="text-4xl font-bold text-foreground">
+                      ${isAnnual ? tier.annualPrice : tier.monthlyPrice}
+                    </span>
+                    <span className="text-muted-foreground">/month</span>
                   </div>
-                )}
-                
-                <div className={`w-16 h-16 bg-gradient-to-r ${tier.color} rounded-full flex items-center justify-center mb-6`}>
-                  <tier.icon className="h-8 w-8 text-white" />
+                  
+                  {/* Tier Name */}
+                  <h3 className="text-xl font-bold text-foreground mb-2">{tier.name}</h3>
+                  
+                  {/* Description */}
+                  <p className="text-muted-foreground text-sm mb-8 min-h-[48px]">
+                    {tier.description}
+                  </p>
+                  
+                  {/* Features */}
+                  <ul className="space-y-4 mb-8">
+                    {tier.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start gap-3">
+                        <Check className={`h-5 w-5 flex-shrink-0 mt-0.5 ${
+                          tier.highlighted ? 'text-secondary' : 'text-primary'
+                        }`} />
+                        <span className="text-sm text-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  {/* CTA Button */}
+                  <Button 
+                    className={`w-full ${
+                      tier.highlighted 
+                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                        : 'bg-transparent border-2 border-border text-foreground hover:bg-accent'
+                    }`}
+                    size="lg"
+                  >
+                    Get Started
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
                 </div>
-                
-                <h3 className="text-2xl font-serif font-bold mb-2">{tier.name}</h3>
-                <div className="flex items-baseline mb-2">
-                  <span className="text-4xl font-bold text-primary">{tier.amount}</span>
-                  <span className="text-muted-foreground ml-2">/month</span>
-                </div>
-                <p className="text-xs text-muted-foreground mb-4">Auto-renews monthly</p>
-                
-                <p className="text-muted-foreground mb-6">{tier.description}</p>
-                
-                <ul className="space-y-3 mb-8">
-                  {tier.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex} className="flex items-center space-x-2">
-                      <Heart className="h-4 w-4 text-secondary flex-shrink-0" />
-                      <span className="text-sm">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <Button 
-                  className={`w-full ${tier.popular ? 'btn-hero' : 'btn-secondary'}`}
-                  size="lg"
-                >
-                  Subscribe {tier.amount}/mo
-                </Button>
               </Card>
             ))}
           </div>
