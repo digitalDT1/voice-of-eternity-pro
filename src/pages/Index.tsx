@@ -278,7 +278,7 @@ const Index = () => {
           <div className="container-custom">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <AnimatedCounter end={150} suffix="+" label="Episodes" duration={2000} />
-              <AnimatedCounter end={50} suffix="K+" label="Monthly Listeners" duration={2500} />
+              <AnimatedCounter end={150} suffix="+" label="Monthly Listeners" duration={2500} />
               <AnimatedCounter end={25} suffix="+" label="Countries" duration={1800} />
               <AnimatedCounter end={5} suffix="" label="Years" duration={1500} />
             </div>
