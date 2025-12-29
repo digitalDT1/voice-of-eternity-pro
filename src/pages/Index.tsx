@@ -105,7 +105,7 @@ const Index = () => {
         {heroSlides.map((slide, index) => (
           <div 
             key={index}
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
+            className="absolute inset-0 bg-cover bg-center md:bg-top bg-no-repeat transition-all duration-1000 ease-in-out"
             style={{
               backgroundImage: `url(${slide.image})`,
               filter: currentSlide === index + 1 
