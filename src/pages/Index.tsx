@@ -109,8 +109,8 @@ const Index = () => {
             style={{
               backgroundImage: `url(${slide.image})`,
               filter: currentSlide === index + 1 
-                ? 'grayscale(70%) brightness(0.6)' 
-                : 'grayscale(70%) brightness(0.6) blur(8px)',
+                ? 'grayscale(70%) brightness(0.75)' 
+                : 'grayscale(70%) brightness(0.75) blur(8px)',
               transform: `scale(${heroScale})`,
               opacity: currentSlide === index + 1 ? heroOpacity : 0,
               zIndex: currentSlide === index + 1 ? 0 : -1,
