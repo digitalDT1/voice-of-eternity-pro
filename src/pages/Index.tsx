@@ -240,18 +240,36 @@ const Index = () => {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="scroll-fade-in">
                 <Card className="card-elegant p-8 card-hover">
-                  <div className="aspect-video bg-gradient-to-br from-primary to-primary-light rounded-lg mb-6 flex items-center justify-center">
-                    <Play className="h-16 w-16 text-white" />
-                  </div>
+                  <a 
+                    href="https://youtu.be/omlZbScbTbc?si=jvBHn8jYXToXar-R" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block aspect-video rounded-lg mb-6 overflow-hidden relative group"
+                  >
+                    <img 
+                      src="https://img.youtube.com/vi/omlZbScbTbc/maxresdefault.jpg" 
+                      alt="Featured Episode Thumbnail"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors duration-300">
+                      <Play className="h-16 w-16 text-white" />
+                    </div>
+                  </a>
                   <h3 className="text-2xl font-serif font-semibold mb-4">Featured Episode</h3>
                   <p className="text-muted-foreground mb-6">
                     "Walking in Purpose: Discovering God's Plan for Your Life" - A powerful message about finding your divine calling and living with intentionality.
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground">Dec 15, 2024</span>
-                    <Button variant="outline" className="group">
-                      Listen <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <a 
+                      href="https://youtu.be/omlZbScbTbc?si=jvBHn8jYXToXar-R" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      <Button variant="outline" className="group">
+                        Watch <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </a>
                   </div>
                 </Card>
               </div>
