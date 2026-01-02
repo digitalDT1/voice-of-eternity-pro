@@ -31,12 +31,16 @@ export function CTASection({
   return (
     <section className={cn("py-16 md:py-24 relative overflow-hidden", className)}>
       <div className="container-custom relative z-10">
-        <div className="relative rounded-3xl border border-border bg-gradient-to-br from-card via-card to-muted p-8 md:p-12 lg:p-16 text-center shadow-lg overflow-hidden">
+        <div className="relative rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/5 via-card to-secondary/5 p-8 md:p-12 lg:p-16 text-center overflow-hidden"
+          style={{
+            boxShadow: '0 -16px 128px 0 hsla(var(--secondary) / 0.3) inset, 0 -16px 32px 0 hsla(var(--primary) / 0.2) inset, 0 8px 32px -8px hsla(var(--primary) / 0.3)'
+          }}
+        >
           {/* Badge */}
           {badge && (
             <Badge
               variant="outline"
-              className="mb-6 animate-fade-in-up opacity-0 border-primary/30 text-primary"
+              className="mb-6 animate-fade-in-up opacity-0 border-secondary/50 text-secondary bg-secondary/10"
             >
               {badge.text}
             </Badge>
@@ -59,18 +63,20 @@ export function CTASection({
             <Button 
               className={cn(
                 "btn-hero",
-                action.variant === "glow" && "shadow-glow"
+                action.variant === "glow" && "shadow-lg"
               )}
             >
               {action.text}
             </Button>
           </Link>
 
-          {/* Glow Effect */}
+          {/* Glow Effect - Blue and Gold Blend */}
           {withGlow && (
-            <div className="absolute inset-0 -z-10 overflow-hidden rounded-3xl">
-              <div className="absolute -top-1/2 left-1/2 -translate-x-1/2 w-[200%] aspect-square bg-gradient-to-b from-primary/10 via-secondary/5 to-transparent rounded-full blur-3xl animate-pulse" />
-            </div>
+            <>
+              <div className="absolute -top-1/2 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-1/2 right-1/4 w-96 h-96 bg-secondary/25 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-32 bg-gradient-to-r from-primary/10 via-secondary/15 to-primary/10 blur-2xl pointer-events-none" />
+            </>
           )}
         </div>
       </div>
