@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { HeroTextSlider } from "@/components/HeroTextSlider";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { CTASection } from "@/components/ui/cta-with-rectangle";
 import heroBg from "@/assets/hero-bg.jpg";
 import heroSlide1 from "@/assets/hero-slide-1.jpg";
 import heroSlide2 from "@/assets/hero-slide-2.jpg";
@@ -314,7 +315,7 @@ const Index = () => {
         <section className="py-16 bg-primary text-white">
           <div className="container-custom">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <AnimatedCounter end={150} suffix="+" label="Episodes" duration={2000} />
+              <AnimatedCounter end={22} suffix="+" label="Episodes" duration={2000} />
               <AnimatedCounter end={150} suffix="+" label="Monthly Listeners" duration={2500} />
               <AnimatedCounter end={25} suffix="+" label="Countries" duration={1800} />
               <AnimatedCounter end={5} suffix="" label="Years" duration={1500} />
@@ -323,25 +324,16 @@ const Index = () => {
         </section>
 
         {/* Call to Action */}
-        <section className="section-padding">
-          <div className="container-custom text-center">
-            <div className="scroll-fade-in max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-gradient mb-6">
-                Join Our Community
-              </h2>
-              <p className="text-xl text-muted-foreground mb-8">
-                Be part of a growing community of believers seeking deeper faith and purpose. Get notified about new episodes and exclusive content.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link to="/about">
-                  <Button className="btn-hero">
-                    Learn More About Pastor
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CTASection
+          badge={{ text: "Join Us" }}
+          title="Join Our Community"
+          description="Be part of a growing community of believers seeking deeper faith and purpose. Get notified about new episodes and exclusive content."
+          action={{
+            text: "Learn More About Pastor",
+            href: "/about",
+            variant: "glow"
+          }}
+        />
       </div>
     </div>
   );
