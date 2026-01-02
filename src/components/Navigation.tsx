@@ -124,8 +124,8 @@ export const Navigation = () => {
                 <Button 
                   className={`text-xs font-medium tracking-[0.15em] uppercase px-6 py-2 rounded-none transition-all duration-300 ${
                     isTransparent 
-                      ? "bg-white text-foreground hover:bg-white/90" 
-                      : "bg-primary dark:text-white hover:bg-primary/90"
+                      ? "bg-white text-black hover:bg-white/90" 
+                      : "bg-primary text-black hover:bg-primary/90"
                   }`}
                 >
                   Partnership
