@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { Heart, Gift, Users, Star, Check, ArrowRight, Mail, Phone, CreditCard } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Heart, Gift, Users, Star, Check, ArrowRight, Mail, Phone } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
-import { SiStripe, SiVisa, SiMastercard, SiPaypal, SiApplepay, SiGooglepay } from "react-icons/si";
 
 const Support = () => {
+  const navigate = useNavigate();
   const heroRef = useRef<HTMLElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAnnual, setIsAnnual] = useState(true);
@@ -49,16 +50,6 @@ const Support = () => {
   // Calculate parallax and fade values based on scroll
   const heroOpacity = Math.max(0, 1 - scrollY / 500);
   const contentTranslateY = scrollY * 0.3;
-
-  // Payment method icons data
-  const paymentIcons = [
-    { Icon: SiStripe, color: "bg-[#635BFF]", label: "Stripe" },
-    { Icon: SiVisa, color: "bg-[#1A1F71]", label: "Visa" },
-    { Icon: SiMastercard, color: "bg-[#EB001B]", label: "Mastercard" },
-    { Icon: SiPaypal, color: "bg-[#003087]", label: "PayPal" },
-    { Icon: SiApplepay, color: "bg-foreground", label: "Apple Pay" },
-    { Icon: SiGooglepay, color: "bg-[#4285F4]", label: "Google Pay" },
-  ];
 
   const pricingTiers = [
     {
@@ -155,79 +146,19 @@ const Support = () => {
               </div>
             </div>
 
-            {/* Right - Payment Icons Floating Design - Tighter cluster like reference */}
-            <div className={`relative h-[300px] md:h-[340px] flex items-center justify-center transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
-              <div className="relative w-[280px] md:w-[320px] h-[280px] md:h-[320px]">
-                {/* Stripe - Large green bag shape (top-left) */}
-                <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="absolute top-[5%] left-[5%] w-20 h-24 md:w-24 md:h-28 bg-[#635BFF] rounded-3xl rounded-bl-[2.5rem] flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
-                  style={{ animationDelay: '0s' }}
-                  aria-label="Pay with Stripe"
-                >
-                  <SiStripe className="w-10 h-10 md:w-12 md:h-12 text-white" />
-                </button>
-
-                {/* Visa - pill (top-right) */}
-                <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="absolute top-[2%] right-[5%] px-4 py-2 bg-[#1A1F71] rounded-full flex items-center shadow-md animate-float hover:scale-110 transition-transform cursor-pointer" 
-                  style={{ animationDelay: '0.3s' }}
-                  aria-label="Pay with Visa"
-                >
-                  <SiVisa className="w-10 h-6 text-white" />
-                </button>
-
-                {/* PayPal - Dark pill (middle-right) */}
-                <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="absolute top-[28%] right-0 px-5 py-3 bg-[#003087] rounded-full flex items-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
-                  style={{ animationDelay: '0.6s' }}
-                  aria-label="Pay with PayPal"
-                >
-                  <SiPaypal className="w-6 h-6 text-white" />
-                </button>
-
-                {/* Mastercard - Circle (middle) */}
-                <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="absolute top-[50%] left-[35%] w-14 h-14 md:w-16 md:h-16 bg-[#EB001B] rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
-                  style={{ animationDelay: '0.9s' }}
-                  aria-label="Pay with Mastercard"
-                >
-                  <SiMastercard className="w-8 h-8 text-white" />
-                </button>
-
-                {/* Apple Pay - Dark rounded (bottom-left) */}
-                <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="absolute bottom-[18%] left-[8%] w-12 h-12 md:w-14 md:h-14 bg-foreground rounded-xl flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
-                  style={{ animationDelay: '1.2s' }}
-                  aria-label="Pay with Apple Pay"
-                >
-                  <SiApplepay className="w-8 h-8 text-background" />
-                </button>
-
-                {/* Google Pay - Blue circle (bottom-center) */}
-                <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="absolute bottom-[5%] left-[40%] w-12 h-12 md:w-14 md:h-14 bg-[#4285F4] rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
-                  style={{ animationDelay: '1.5s' }}
-                  aria-label="Pay with Google Pay"
-                >
-                  <SiGooglepay className="w-7 h-7 text-white" />
-                </button>
-
-                {/* Credit card decorative (top-center) */}
-                <div className="absolute top-[18%] left-[50%] w-10 h-10 bg-secondary/30 rounded-full flex items-center justify-center animate-float" style={{ animationDelay: '0.5s' }}>
-                  <CreditCard className="w-5 h-5 text-secondary" />
-                </div>
-
-                {/* Heart decorative (bottom-right) */}
-                <div className="absolute bottom-[25%] right-[10%] w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center animate-float" style={{ animationDelay: '1s' }}>
-                  <Heart className="w-5 h-5 text-primary" />
-                </div>
-              </div>
+            {/* Right - Partner With Us Button */}
+            <div className={`flex items-center justify-center transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
+              <Button
+                onClick={() => navigate("/partner")}
+                size="lg"
+                className="group relative px-12 py-8 h-auto text-2xl md:text-3xl font-bold bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95"
+              >
+                <span className="flex items-center gap-3">
+                  <Heart className="h-8 w-8" />
+                  Partner With Us
+                  <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                </span>
+              </Button>
             </div>
           </div>
         </div>
