@@ -17,21 +17,21 @@ const heroSlides = [
     image: heroSlide1,
     line1: "VOICE OF",
     line2: "ETERNITY",
-    tagline: "Transforming lives through the power of God's unchanging Word",
+    tagline: "Proclaiming God's eternal Counsels, bringing many into the realities of Christ",
     showApostleLabel: false
   },
   {
     image: heroSlide2,
     line1: "EDWIN",
     line2: "OTEJIRI",
-    tagline: "Proclaiming God's eternal Counsels, bringing many into the realities of Christ",
+    tagline: "Transforming lives through the power of God's unchanging Word",
     showApostleLabel: true
   },
   {
     image: heroSlide3,
     line1: "AN ARMY OF",
     line2: "CONSECRATED MEN",
-    tagline: "Awakening destinies and igniting passion for the Kingdom",
+    tagline: "Raising a generation of consecrated vessels for Kingdom impact",
     showApostleLabel: false
   }
 ];
