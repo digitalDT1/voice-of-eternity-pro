@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 interface HeroTextSliderProps {
-  texts: { line1: string; line2: string; tagline: string }[];
+  texts: { line1: string; line2: string; tagline: string; showApostleLabel?: boolean }[];
   interval?: number;
   currentSlide: number;
   setCurrentSlide: (slide: number) => void;
@@ -34,23 +34,25 @@ export const HeroTextSlider = ({
 
   return (
     <div className="max-w-xl text-right pr-4 md:pr-8 lg:pr-16">
-      {/* Apostle Label with Line - Animated */}
-      <div
-        className={`flex items-center justify-end gap-4 mb-8 transition-all duration-1000 ease-out ${
-          isLoaded ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-        }`}
-        style={{ transitionDelay: "200ms" }}
-      >
+      {/* Apostle Label with Line - Animated (only show when showApostleLabel is true) */}
+      {currentText.showApostleLabel && (
         <div
-          className={`h-[1px] bg-white/50 transition-all duration-1000 ease-out ${
-            isLoaded ? "w-16" : "w-0"
+          className={`flex items-center justify-end gap-4 mb-8 transition-all duration-1000 ease-out ${
+            isLoaded && !isTransitioning ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
           }`}
-          style={{ transitionDelay: "600ms" }}
-        ></div>
-        <span className="text-xs tracking-[0.3em] uppercase text-white/80 font-light">
-          Apostle
-        </span>
-      </div>
+          style={{ transitionDelay: "200ms" }}
+        >
+          <div
+            className={`h-[1px] bg-white/50 transition-all duration-1000 ease-out ${
+              isLoaded && !isTransitioning ? "w-16" : "w-0"
+            }`}
+            style={{ transitionDelay: "600ms" }}
+          ></div>
+          <span className="text-xs tracking-[0.3em] uppercase text-white/80 font-light">
+            Apostle
+          </span>
+        </div>
+      )}
 
       {/* Large Name Heading - With Text Transition */}
       <h1 className="relative overflow-hidden">
