@@ -34,18 +34,6 @@ export const HeroTextSlider = ({
 
   return (
     <div className="max-w-2xl text-right pr-4 md:pr-8 lg:pr-16">
-      {/* Tagline - Above main text, right aligned */}
-      <p
-        className={`mb-4 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto transition-all duration-700 ease-out ${
-          isLoaded && !isTransitioning
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-4"
-        }`}
-        style={{ transitionDelay: isLoaded ? "0ms" : "800ms" }}
-      >
-        {currentText.tagline}
-      </p>
-
       {/* Apostle Label with Line - Animated (only show when showApostleLabel is true) */}
       {currentText.showApostleLabel && (
         <div
@@ -55,18 +43,18 @@ export const HeroTextSlider = ({
           style={{ transitionDelay: "200ms" }}
         >
           <div
-            className={`h-[2px] bg-amber-500 transition-all duration-1000 ease-out ${
+            className={`h-[2px] bg-white transition-all duration-1000 ease-out ${
               isLoaded && !isTransitioning ? "w-12" : "w-0"
             }`}
             style={{ transitionDelay: "600ms" }}
           ></div>
-          <span className="text-sm tracking-[0.3em] uppercase text-amber-500 font-medium">
+          <span className="text-sm tracking-[0.3em] uppercase text-white font-medium">
             Apostle
           </span>
         </div>
       )}
 
-      {/* Large Name Heading - With Text Transition */}
+      {/* Large Name Heading - Main text on top */}
       <h1 className="relative overflow-hidden">
         <span
           className={`block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold text-white leading-[1] tracking-tight transition-all duration-700 ease-out ${
@@ -90,6 +78,17 @@ export const HeroTextSlider = ({
         </span>
       </h1>
 
+      {/* Tagline - Below main text, right aligned */}
+      <p
+        className={`mt-4 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto transition-all duration-700 ease-out ${
+          isLoaded && !isTransitioning
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4"
+        }`}
+        style={{ transitionDelay: isLoaded ? "200ms" : "800ms" }}
+      >
+        {currentText.tagline}
+      </p>
     </div>
   );
 };

@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { Heart, Gift, Users, Star, Check, ArrowRight, Mail, Phone, CreditCard } from "lucide-react";
+import { Heart, Gift, Users, Star, ArrowRight, Mail, Phone, CreditCard, Bitcoin, Building, Wallet } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
+import { Input } from "@/components/ui/input";
 import { SiStripe, SiVisa, SiMastercard, SiPaypal, SiApplepay, SiGooglepay } from "react-icons/si";
 
 const Support = () => {
   const heroRef = useRef<HTMLElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isAnnual, setIsAnnual] = useState(true);
   const [scrollY, setScrollY] = useState(0);
+  const [showPaymentOptions, setShowPaymentOptions] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null);
+  const [donationAmount, setDonationAmount] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
@@ -60,49 +62,14 @@ const Support = () => {
     { Icon: SiGooglepay, color: "bg-[#4285F4]", label: "Google Pay" },
   ];
 
-  const pricingTiers = [
-    {
-      name: "Faith Partner",
-      monthlyPrice: 10,
-      annualPrice: 8,
-      description: "All the basics for individuals who are just getting started with supporting the ministry.",
-      features: [
-        "Monthly newsletter",
-        "Prayer request inclusion",
-        "Early content access"
-      ],
-      popular: false,
-      highlighted: false
-    },
-    {
-      name: "Kingdom Builder",
-      monthlyPrice: 25,
-      annualPrice: 21,
-      description: "Better for dedicated supporters who want to make a bigger impact.",
-      features: [
-        "All Faith Partner benefits",
-        "Exclusive monthly updates",
-        "Priority prayer requests",
-        "Community access"
-      ],
-      popular: true,
-      highlighted: true
-    },
-    {
-      name: "Champion Partner",
-      monthlyPrice: 50,
-      annualPrice: 42,
-      description: "Advanced partnership for those who want maximum ministry engagement.",
-      features: [
-        "All previous benefits",
-        "Quarterly video calls",
-        "Special ministry access",
-        "Direct ministry updates"
-      ],
-      popular: false,
-      highlighted: false
-    }
+  const paymentMethods = [
+    { id: "card", label: "Bank Card", icon: CreditCard, description: "Pay with Visa, Mastercard, or other cards" },
+    { id: "crypto", label: "Cryptocurrency", icon: Bitcoin, description: "Pay with Bitcoin, Ethereum, or other crypto" },
+    { id: "transfer", label: "Bank Transfer", icon: Building, description: "Direct bank transfer" },
+    { id: "wallet", label: "Digital Wallet", icon: Wallet, description: "PayPal, Apple Pay, Google Pay" },
   ];
+
+  const quickAmounts = [10, 25, 50, 100, 250, 500];
 
   const impactStats = [
     { icon: Users, number: "50,000+", label: "Lives Touched Monthly" },
@@ -110,6 +77,17 @@ const Support = () => {
     { icon: Star, number: "150+", label: "Episodes Created" },
     { icon: Heart, number: "1,000+", label: "Prayer Requests Answered" }
   ];
+
+  const handleDonate = () => {
+    setShowPaymentOptions(true);
+    setTimeout(() => {
+      document.getElementById('payment-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const handlePaymentMethodSelect = (methodId: string) => {
+    setSelectedPaymentMethod(methodId);
+  };
 
   return (
     <div className="min-h-screen">
@@ -137,7 +115,7 @@ const Support = () => {
                 Your support enables us to continue spreading hope, faith, and biblical truth to hearts around the world. Together, we can make an eternal impact.
               </p>
               
-              <Button className="btn-secondary group" size="lg">
+              <Button className="btn-secondary group" size="lg" onClick={handleDonate}>
                 Start Giving
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -155,12 +133,12 @@ const Support = () => {
               </div>
             </div>
 
-            {/* Right - Payment Icons Floating Design - Tighter cluster like reference */}
+            {/* Right - Payment Icons Floating Design */}
             <div className={`relative h-[300px] md:h-[340px] flex items-center justify-center transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '400ms' }}>
               <div className="relative w-[280px] md:w-[320px] h-[280px] md:h-[320px]">
-                {/* Stripe - Large green bag shape (top-left) */}
+                {/* Stripe */}
                 <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={handleDonate}
                   className="absolute top-[5%] left-[5%] w-20 h-24 md:w-24 md:h-28 bg-[#635BFF] rounded-3xl rounded-bl-[2.5rem] flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
                   style={{ animationDelay: '0s' }}
                   aria-label="Pay with Stripe"
@@ -168,9 +146,9 @@ const Support = () => {
                   <SiStripe className="w-10 h-10 md:w-12 md:h-12 text-white" />
                 </button>
 
-                {/* Visa - pill (top-right) */}
+                {/* Visa */}
                 <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={handleDonate}
                   className="absolute top-[2%] right-[5%] px-4 py-2 bg-[#1A1F71] rounded-full flex items-center shadow-md animate-float hover:scale-110 transition-transform cursor-pointer" 
                   style={{ animationDelay: '0.3s' }}
                   aria-label="Pay with Visa"
@@ -178,9 +156,9 @@ const Support = () => {
                   <SiVisa className="w-10 h-6 text-white" />
                 </button>
 
-                {/* PayPal - Dark pill (middle-right) */}
+                {/* PayPal */}
                 <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={handleDonate}
                   className="absolute top-[28%] right-0 px-5 py-3 bg-[#003087] rounded-full flex items-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
                   style={{ animationDelay: '0.6s' }}
                   aria-label="Pay with PayPal"
@@ -188,9 +166,9 @@ const Support = () => {
                   <SiPaypal className="w-6 h-6 text-white" />
                 </button>
 
-                {/* Mastercard - Circle (middle) */}
+                {/* Mastercard */}
                 <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={handleDonate}
                   className="absolute top-[50%] left-[35%] w-14 h-14 md:w-16 md:h-16 bg-[#EB001B] rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
                   style={{ animationDelay: '0.9s' }}
                   aria-label="Pay with Mastercard"
@@ -198,9 +176,9 @@ const Support = () => {
                   <SiMastercard className="w-8 h-8 text-white" />
                 </button>
 
-                {/* Apple Pay - Dark rounded (bottom-left) */}
+                {/* Apple Pay */}
                 <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={handleDonate}
                   className="absolute bottom-[18%] left-[8%] w-12 h-12 md:w-14 md:h-14 bg-foreground rounded-xl flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
                   style={{ animationDelay: '1.2s' }}
                   aria-label="Pay with Apple Pay"
@@ -208,9 +186,9 @@ const Support = () => {
                   <SiApplepay className="w-8 h-8 text-background" />
                 </button>
 
-                {/* Google Pay - Blue circle (bottom-center) */}
+                {/* Google Pay */}
                 <button 
-                  onClick={() => document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={handleDonate}
                   className="absolute bottom-[5%] left-[40%] w-12 h-12 md:w-14 md:h-14 bg-[#4285F4] rounded-full flex items-center justify-center shadow-lg animate-float hover:scale-110 transition-transform cursor-pointer" 
                   style={{ animationDelay: '1.5s' }}
                   aria-label="Pay with Google Pay"
@@ -218,12 +196,12 @@ const Support = () => {
                   <SiGooglepay className="w-7 h-7 text-white" />
                 </button>
 
-                {/* Credit card decorative (top-center) */}
+                {/* Credit card decorative */}
                 <div className="absolute top-[18%] left-[50%] w-10 h-10 bg-secondary/30 rounded-full flex items-center justify-center animate-float" style={{ animationDelay: '0.5s' }}>
                   <CreditCard className="w-5 h-5 text-secondary" />
                 </div>
 
-                {/* Heart decorative (bottom-right) */}
+                {/* Heart decorative */}
                 <div className="absolute bottom-[25%] right-[10%] w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center animate-float" style={{ animationDelay: '1s' }}>
                   <Heart className="w-5 h-5 text-primary" />
                 </div>
@@ -261,106 +239,194 @@ const Support = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing-section" className="section-padding">
+      {/* Donate Section */}
+      <section id="payment-section" className="section-padding">
         <div className="container-custom">
           <div className="scroll-fade-in text-center mb-12">
-            <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Our Pricing</Badge>
+            <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">Support</Badge>
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-              Choose the plan that's right<br className="hidden md:block" /> for your partnership
+              Make a Donation
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-              Start with the <span className="font-semibold">Free plan</span> to try out our platform for an unlimited period of time.{" "}
-              <a href="#" className="text-primary font-semibold hover:underline inline-flex items-center gap-1">
-                Get started <ArrowRight className="h-4 w-4" />
-              </a>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Your generous gift helps us continue spreading the gospel and transforming lives worldwide.
             </p>
-
-            {/* Billing Toggle */}
-            <div className="flex items-center justify-center gap-4 mb-12">
-              <span className={`text-sm font-medium ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
-                Bill Monthly
-              </span>
-              <Switch
-                checked={isAnnual}
-                onCheckedChange={setIsAnnual}
-                className="data-[state=checked]:bg-secondary"
-              />
-              <div className="flex items-center gap-2">
-                <span className={`text-sm font-medium ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
-                  Bill Annually
-                </span>
-                <span className="text-xs font-semibold text-secondary">Save 15%</span>
-              </div>
-            </div>
           </div>
 
-          {/* Pricing Cards */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {pricingTiers.map((tier, index) => (
-              <Card 
-                key={index} 
-                className={`scroll-fade-in relative overflow-hidden bg-card border rounded-xl ${
-                  tier.highlighted ? 'border-secondary' : 'border-border'
-                }`}
-              >
-                {/* Top Border Line */}
-                <div className={`h-1 w-full ${
-                  index === 0 ? 'bg-primary' : 
-                  index === 1 ? 'bg-secondary' : 
-                  'bg-primary'
-                }`} />
-                
-                <div className="p-8">
-                  {/* Price */}
-                  <div className="mb-4">
-                    <span className="text-4xl font-bold text-foreground">
-                      ${isAnnual ? tier.annualPrice : tier.monthlyPrice}
-                    </span>
-                    <span className="text-muted-foreground">/month</span>
+          {/* Single Donate Card */}
+          <div className="max-w-2xl mx-auto">
+            <Card className="scroll-fade-in relative overflow-hidden bg-card border border-border rounded-xl">
+              {/* Top Border Line */}
+              <div className="h-1 w-full bg-secondary" />
+              
+              <div className="p-8">
+                {!showPaymentOptions ? (
+                  <>
+                    {/* Amount Selection */}
+                    <div className="mb-8">
+                      <label className="block text-sm font-medium text-foreground mb-4">Select Amount</label>
+                      <div className="grid grid-cols-3 gap-3 mb-4">
+                        {quickAmounts.map((amount) => (
+                          <button
+                            key={amount}
+                            onClick={() => setDonationAmount(amount.toString())}
+                            className={`py-3 px-4 rounded-lg border-2 font-semibold transition-all ${
+                              donationAmount === amount.toString()
+                                ? 'border-secondary bg-secondary/10 text-secondary'
+                                : 'border-border hover:border-secondary/50 text-foreground'
+                            }`}
+                          >
+                            ${amount}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="relative">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+                        <Input
+                          type="number"
+                          placeholder="Custom amount"
+                          value={donationAmount}
+                          onChange={(e) => setDonationAmount(e.target.value)}
+                          className="pl-8"
+                        />
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <Button 
+                      className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                      size="lg"
+                      onClick={handleDonate}
+                      disabled={!donationAmount}
+                    >
+                      Continue to Payment
+                      <ArrowRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    {/* Payment Method Selection */}
+                    <div className="mb-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <label className="block text-sm font-medium text-foreground">Select Payment Method</label>
+                        <button 
+                          onClick={() => setShowPaymentOptions(false)}
+                          className="text-sm text-muted-foreground hover:text-foreground"
+                        >
+                          ← Back
+                        </button>
+                      </div>
+                      
+                      {donationAmount && (
+                        <div className="mb-6 p-4 bg-accent/30 rounded-lg text-center">
+                          <span className="text-sm text-muted-foreground">Amount: </span>
+                          <span className="text-2xl font-bold text-foreground">${donationAmount}</span>
+                        </div>
+                      )}
+
+                      <div className="space-y-3">
+                        {paymentMethods.map((method) => (
+                          <button
+                            key={method.id}
+                            onClick={() => handlePaymentMethodSelect(method.id)}
+                            className={`w-full p-4 rounded-lg border-2 flex items-center gap-4 transition-all text-left ${
+                              selectedPaymentMethod === method.id
+                                ? 'border-secondary bg-secondary/10'
+                                : 'border-border hover:border-secondary/50'
+                            }`}
+                          >
+                            <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                              selectedPaymentMethod === method.id ? 'bg-secondary/20' : 'bg-accent'
+                            }`}>
+                              <method.icon className={`h-6 w-6 ${
+                                selectedPaymentMethod === method.id ? 'text-secondary' : 'text-muted-foreground'
+                              }`} />
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-foreground">{method.label}</h4>
+                              <p className="text-sm text-muted-foreground">{method.description}</p>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Proceed Button */}
+                    <Button 
+                      className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                      size="lg"
+                      disabled={!selectedPaymentMethod}
+                    >
+                      Proceed to Pay
+                      <ArrowRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  </>
+                )}
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Giving Details Section */}
+      <section className="section-padding bg-accent/30">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left - Title and Description */}
+            <div className="scroll-fade-in">
+              <h2 className="text-4xl font-serif font-bold mb-4">
+                <span className="text-foreground">Giving </span>
+                <span className="text-secondary">Details</span>
+              </h2>
+              <p className="text-muted-foreground">
+                For your giving in Cash and kinds, kindly make use of the following account details
+              </p>
+            </div>
+
+            {/* Right - Bank Account Details Card */}
+            <Card className="scroll-fade-in bg-card border border-border rounded-2xl overflow-hidden">
+              <div className="p-8">
+                {/* Account Headers */}
+                <div className="grid grid-cols-2 gap-8 mb-6">
+                  <div className="text-center">
+                    <h3 className="text-sm font-medium text-muted-foreground mb-4">Naira Account</h3>
+                    <p className="text-2xl md:text-3xl font-bold text-primary mb-2">0691972149</p>
+                    <p className="text-sm font-semibold text-foreground">Udechukwu Chinedu Joshua</p>
+                    <p className="text-sm text-muted-foreground">Access Bank</p>
                   </div>
                   
-                  {/* Tier Name */}
-                  <h3 className="text-xl font-bold text-foreground mb-2">{tier.name}</h3>
-                  
-                  {/* Description */}
-                  <p className="text-muted-foreground text-sm mb-8 min-h-[48px]">
-                    {tier.description}
-                  </p>
-                  
-                  {/* Features */}
-                  <ul className="space-y-4 mb-8">
-                    {tier.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start gap-3">
-                        <Check className={`h-5 w-5 flex-shrink-0 mt-0.5 ${
-                          tier.highlighted ? 'text-secondary' : 'text-primary'
-                        }`} />
-                        <span className="text-sm text-foreground">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  {/* CTA Button */}
-                  <Button 
-                    className={`w-full ${
-                      tier.highlighted 
-                        ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                        : 'bg-transparent border-2 border-border text-foreground hover:bg-accent'
-                    }`}
-                    size="lg"
-                  >
-                    Get Started
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
+                  <div className="text-center border-l border-border pl-8">
+                    <h3 className="text-sm font-medium text-muted-foreground mb-4">Dollar Account</h3>
+                    <p className="text-2xl md:text-3xl font-bold text-secondary mb-2">1472460398</p>
+                    <p className="text-sm font-semibold text-foreground">Udechukwu Chinedu Joshua</p>
+                    <p className="text-sm text-muted-foreground">Access Bank</p>
+                  </div>
                 </div>
-              </Card>
-            ))}
+
+                {/* Additional Bank Details */}
+                <div className="border-t border-border pt-6 text-center">
+                  <div className="space-y-2">
+                    <p className="text-sm">
+                      <span className="font-semibold text-foreground">Swift code - </span>
+                      <span className="text-muted-foreground">ABNGNGLA</span>
+                    </p>
+                    <p className="text-sm">
+                      <span className="font-semibold text-foreground">Sort code - </span>
+                      <span className="text-muted-foreground">044020703</span>
+                    </p>
+                    <p className="text-sm">
+                      <span className="font-semibold text-foreground">Bank Address - </span>
+                      <span className="text-muted-foreground">2 Ezemewi Street, Nnewi, 435101, Anambra State.</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Why Support Matters */}
-      <section className="section-padding bg-accent/30">
+      <section className="section-padding">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="scroll-fade-in">
@@ -383,8 +449,8 @@ const Support = () => {
                     <Gift className="h-4 w-4 text-secondary" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Quality Content</h3>
-                    <p className="text-muted-foreground">Funding helps us invest in better equipment, professional editing, and creating additional resources like study guides.</p>
+                    <h3 className="text-xl font-semibold mb-2">Content Creation</h3>
+                    <p className="text-muted-foreground">Every contribution helps produce high-quality episodes, reaching souls hungry for truth.</p>
                   </div>
                 </div>
                 
@@ -393,51 +459,42 @@ const Support = () => {
                     <Users className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">Ministry Expansion</h3>
-                    <p className="text-muted-foreground">Support enables us to launch new initiatives like youth programs, community outreach, and mentorship opportunities.</p>
+                    <h3 className="text-xl font-semibold mb-2">Community Building</h3>
+                    <p className="text-muted-foreground">Your partnership enables us to build and nurture a global community of believers.</p>
                   </div>
                 </div>
               </div>
             </div>
             
             <div className="scroll-fade-in">
-              <Card className="card-elegant p-8">
-                <h3 className="text-2xl font-serif font-bold mb-4">Ministry Transparency</h3>
+              <Card className="p-8">
+                <h3 className="text-2xl font-serif font-bold mb-6">Transparency</h3>
                 <p className="text-muted-foreground mb-6">
-                  We believe in complete transparency with our supporters. Here's how your donations are used:
+                  We believe in complete transparency with our partners. Here's how your contributions are used:
                 </p>
-                
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span>Podcast Production</span>
-                    <span className="font-semibold">40%</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Content Production</span>
+                    <span className="font-semibold">45%</span>
                   </div>
                   <div className="w-full bg-accent rounded-full h-2">
-                    <div className="bg-primary h-2 rounded-full" style={{ width: '40%' }}></div>
+                    <div className="bg-primary h-2 rounded-full" style={{ width: '45%' }}></div>
                   </div>
                   
-                  <div className="flex justify-between items-center">
-                    <span>Outreach Programs</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Global Outreach</span>
                     <span className="font-semibold">30%</span>
                   </div>
                   <div className="w-full bg-accent rounded-full h-2">
                     <div className="bg-secondary h-2 rounded-full" style={{ width: '30%' }}></div>
                   </div>
                   
-                  <div className="flex justify-between items-center">
-                    <span>Ministry Operations</span>
-                    <span className="font-semibold">20%</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Community Programs</span>
+                    <span className="font-semibold">25%</span>
                   </div>
                   <div className="w-full bg-accent rounded-full h-2">
-                    <div className="bg-primary h-2 rounded-full" style={{ width: '20%' }}></div>
-                  </div>
-                  
-                  <div className="flex justify-between items-center">
-                    <span>Future Growth</span>
-                    <span className="font-semibold">10%</span>
-                  </div>
-                  <div className="w-full bg-accent rounded-full h-2">
-                    <div className="bg-secondary h-2 rounded-full" style={{ width: '10%' }}></div>
+                    <div className="bg-primary h-2 rounded-full" style={{ width: '25%' }}></div>
                   </div>
                 </div>
               </Card>
@@ -446,53 +503,6 @@ const Support = () => {
         </div>
       </section>
 
-      {/* Alternative Support Methods */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="scroll-fade-in text-center mb-12">
-            <h2 className="text-3xl font-serif font-bold text-gradient mb-4">
-              Other Ways to Support
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Not ready for financial support? There are many other meaningful ways to help our ministry grow.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="card-elegant p-6 text-center scroll-fade-in card-hover">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="font-semibold mb-2">Share Episodes</h3>
-              <p className="text-muted-foreground text-sm">Help us reach more people by sharing episodes on social media.</p>
-            </Card>
-            
-            <Card className="card-elegant p-6 text-center scroll-fade-in card-hover">
-              <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="h-6 w-6 text-secondary" />
-              </div>
-              <h3 className="font-semibold mb-2">Leave Reviews</h3>
-              <p className="text-muted-foreground text-sm">Write positive reviews on podcast platforms to help others discover us.</p>
-            </Card>
-            
-            <Card className="card-elegant p-6 text-center scroll-fade-in card-hover">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="font-semibold mb-2">Join Community</h3>
-              <p className="text-muted-foreground text-sm">Participate in our online community and help encourage others.</p>
-            </Card>
-            
-            <Card className="card-elegant p-6 text-center scroll-fade-in card-hover">
-              <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Gift className="h-6 w-6 text-secondary" />
-              </div>
-              <h3 className="font-semibold mb-2">Volunteer</h3>
-              <p className="text-muted-foreground text-sm">Offer your skills and time to help with various ministry projects.</p>
-            </Card>
-          </div>
-        </div>
-      </section>
       </div>
     </div>
   );
