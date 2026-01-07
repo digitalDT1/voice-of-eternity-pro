@@ -15,21 +15,24 @@ import heroSlide3 from "@/assets/hero-slide-3.jpg";
 const heroSlides = [
   {
     image: heroSlide1,
-    line1: "EDWIN",
-    line2: "OTEJIRI",
-    tagline: "Proclaiming God's eternal Counsels, bringing many into the realities of Christ"
+    line1: "VOICE OF",
+    line2: "ETERNITY",
+    tagline: "Transforming lives through the power of God's unchanging Word",
+    showApostleLabel: false
   },
   {
     image: heroSlide2,
-    line1: "VOICE OF",
-    line2: "ETERNITY",
-    tagline: "Transforming lives through the power of God's unchanging Word"
+    line1: "EDWIN",
+    line2: "OTEJIRI",
+    tagline: "Proclaiming God's eternal Counsels, bringing many into the realities of Christ",
+    showApostleLabel: true
   },
   {
     image: heroSlide3,
-    line1: "DIVINE",
-    line2: "PURPOSE",
-    tagline: "Awakening destinies and igniting passion for the Kingdom"
+    line1: "AN ARMY OF",
+    line2: "CONSECRATED MEN",
+    tagline: "Awakening destinies and igniting passion for the Kingdom",
+    showApostleLabel: false
   }
 ];
 
@@ -45,7 +48,8 @@ const Index = () => {
   const heroTexts = heroSlides.map(slide => ({
     line1: slide.line1,
     line2: slide.line2,
-    tagline: slide.tagline
+    tagline: slide.tagline,
+    showApostleLabel: slide.showApostleLabel
   }));
 
   // Entrance animation trigger
