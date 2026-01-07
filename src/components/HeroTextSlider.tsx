@@ -33,12 +33,24 @@ export const HeroTextSlider = ({
   const currentText = texts[currentSlide - 1] || texts[0];
 
   return (
-    <div className="max-w-2xl text-left pl-4 md:pl-8 lg:pl-0">
+    <div className="max-w-2xl text-right pr-4 md:pr-8 lg:pr-16">
+      {/* Tagline - Above main text, right aligned */}
+      <p
+        className={`mb-4 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md ml-auto transition-all duration-700 ease-out ${
+          isLoaded && !isTransitioning
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4"
+        }`}
+        style={{ transitionDelay: isLoaded ? "0ms" : "800ms" }}
+      >
+        {currentText.tagline}
+      </p>
+
       {/* Apostle Label with Line - Animated (only show when showApostleLabel is true) */}
       {currentText.showApostleLabel && (
         <div
-          className={`flex items-center justify-start gap-4 mb-6 transition-all duration-1000 ease-out ${
-            isLoaded && !isTransitioning ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+          className={`flex items-center justify-end gap-4 mb-6 transition-all duration-1000 ease-out ${
+            isLoaded && !isTransitioning ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
           }`}
           style={{ transitionDelay: "200ms" }}
         >
@@ -78,17 +90,6 @@ export const HeroTextSlider = ({
         </span>
       </h1>
 
-      {/* Tagline - Fade Up with transition */}
-      <p
-        className={`mt-6 text-sm md:text-base text-white/60 font-light tracking-wide max-w-md transition-all duration-700 ease-out ${
-          isLoaded && !isTransitioning
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-4"
-        }`}
-        style={{ transitionDelay: isLoaded ? "200ms" : "800ms" }}
-      >
-        {currentText.tagline}
-      </p>
     </div>
   );
 };

@@ -141,7 +141,7 @@ const Index = () => {
             opacity: contentOpacity
           }}
         >
-          <div className="w-full flex justify-end">
+          <div className="w-full flex justify-end items-end h-full pb-32">
             <HeroTextSlider 
               texts={heroTexts}
               interval={5000}
